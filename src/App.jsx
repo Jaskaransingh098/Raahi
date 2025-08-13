@@ -5,7 +5,7 @@ import Loader from "./components/Loader/Loader";
 import Navbar from "./components/Navbar/Navbar";
 import Body from "./components/Body/Body";
 import Footer from "./components/Footer/Footer";
-import Contact from "./pages/Contact/Contact";
+import Contact from "./Pages/Contact/Contact";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import OurGallery from "./Pages/OurGallery/OurGallery";
 import Customise from "./Pages/Customise/Customise";
