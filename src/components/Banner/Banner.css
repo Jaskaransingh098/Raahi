@@ -1,0 +1,65 @@
+.banner-container {
+    border-radius: 30px;
+    margin-top: 10px;
+    width: 97%;
+    margin-left: 22px;
+    overflow: hidden;
+}
+
+.banner-image {
+    background-image: url('https://html.pixelfit.agency/tripex/assets/images/innerpage/bg/page-bg.jpg');
+    /* Same image for all */
+    background-size: cover;
+    background-position: center;
+    height: 330px;
+    position: relative;
+}
+
+.banner-overlay {
+    position: absolute;
+    bottom: -8em;
+    /* distance from bottom */
+    left: 20px;
+    /* distance from left */
+    display: inline-block;
+    position: relative;
+}
+
+.brush-img {
+    display: block;
+    height: auto;
+    max-width: 600px;
+    /* adjust as needed */
+}
+
+.banner-text {
+    position: absolute;
+    top: 65%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    /* breadcrumb aligns like screenshot */
+    color: white;
+    width: 80%;
+    /* keeps text inside brush */
+}
+
+.banner-text h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.banner-text p {
+    margin-top: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.banner-text .banner-link {
+    margin-top: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+}
