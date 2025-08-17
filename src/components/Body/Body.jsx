@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import CountUp from "react-countup";
 import "./Body.css";
+import { useNavigate } from "react-router-dom";
 
 const AwardIcon = () => (
   <svg
@@ -171,7 +172,6 @@ const LocationPinIcon = () => (
 
 function Body() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [open, setOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [startCounting, setStartCounting] = useState(false);
   const statsRef = useRef(null);
@@ -192,6 +192,19 @@ function Body() {
     if (dropdownName === "duration") setSelectedDuration(value);
     if (dropdownName === "guests") setSelectedGuests(value);
     setOpenDropdown(null); // Close dropdown after selecting
+  };
+
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    const queryParams = new URLSearchParams({
+      destination: selectedDestination,
+      activity: selectedActivity,
+      duration: selectedDuration,
+      guests: selectedGuests,
+    }).toString();
+
+    navigate(`/search-results?${queryParams}`);
   };
 
   // Effect to add and clean up mouse move event listener
@@ -624,16 +637,36 @@ function Body() {
   ];
 
   const logos = [
-    { id: 1, src: "https://raahioutdoors.com/images/partner/logo5.jpeg", alt: "Travel Brand 1" },
-    { id: 2, src: "https://raahioutdoors.com/images/partner/logo2.jpeg", alt: "Worldfly Brand" },
-    { id: 3, src: "https://raahioutdoors.com/images/partner/logo3.jpeg", alt: "Travel Brand 2" },
+    {
+      id: 1,
+      src: "https://raahioutdoors.com/images/partner/logo5.jpeg",
+      alt: "Travel Brand 1",
+    },
+    {
+      id: 2,
+      src: "https://raahioutdoors.com/images/partner/logo2.jpeg",
+      alt: "Worldfly Brand",
+    },
+    {
+      id: 3,
+      src: "https://raahioutdoors.com/images/partner/logo3.jpeg",
+      alt: "Travel Brand 2",
+    },
     {
       id: 4,
       src: "https://raahioutdoors.com/images/partner/logo1.jpeg",
       alt: "Travel Discount Brand",
     },
-    { id: 5, src: "https://raahioutdoors.com/images/partner/logo2.jpeg", alt: "iTravel Brand" },
-    { id: 6, src: "https://raahioutdoors.com/images/partner/logo3.jpeg", alt: "Travel Brand 3" },
+    {
+      id: 5,
+      src: "https://raahioutdoors.com/images/partner/logo2.jpeg",
+      alt: "iTravel Brand",
+    },
+    {
+      id: 6,
+      src: "https://raahioutdoors.com/images/partner/logo3.jpeg",
+      alt: "Travel Brand 3",
+    },
     {
       id: 7,
       src: "https://raahioutdoors.com/images/partner/logo4.jpeg",
@@ -920,40 +953,36 @@ function Body() {
                   openDropdown === "destinations" ? "show" : ""
                 }`}
               >
-                <div onClick={() => handleSelect("destinations", "All Destinations")}>
+                <div
+                  onClick={() =>
+                    handleSelect("destinations", "All Destinations")
+                  }
+                >
                   All Destinations
                 </div>
-                <div onClick={() => handleSelect("destinations", "Himachal Pradesh")}>
+                <div
+                  onClick={() =>
+                    handleSelect("destinations", "Himachal Pradesh")
+                  }
+                >
                   Himachal Pradhesh
                 </div>
-                <div
-                  onClick={() => handleSelect("destinations", "Uttrakhand")}
-                >
+                <div onClick={() => handleSelect("destinations", "Uttrakhand")}>
                   Uttrakhand
                 </div>
-                <div
-                  onClick={() => handleSelect("destinations", "Rajasthan")}
-                >
+                <div onClick={() => handleSelect("destinations", "Rajasthan")}>
                   Rajasthan
                 </div>
-                <div
-                  onClick={() => handleSelect("destinations", "Goa")}
-                >
+                <div onClick={() => handleSelect("destinations", "Goa")}>
                   Goa
                 </div>
-                <div
-                  onClick={() => handleSelect("destinations", "Ladakh")}
-                >
+                <div onClick={() => handleSelect("destinations", "Ladakh")}>
                   Ladakh
                 </div>
-                <div
-                  onClick={() => handleSelect("destinations", "Bhutan")}
-                >
+                <div onClick={() => handleSelect("destinations", "Bhutan")}>
                   Bhutan
                 </div>
-                <div
-                  onClick={() => handleSelect("destinations", "Nepal")}
-                >
+                <div onClick={() => handleSelect("destinations", "Nepal")}>
                   Nepal
                 </div>
                 <div
@@ -1009,17 +1038,13 @@ function Body() {
                   openDropdown === "activity" ? "show" : ""
                 }`}
               >
-                <div
-                  onClick={() => handleSelect("activity", "Trekking")}
-                >
+                <div onClick={() => handleSelect("activity", "Trekking")}>
                   Trekking
                 </div>
                 <div onClick={() => handleSelect("activity", "Camping")}>
                   Camping
                 </div>
-                <div
-                  onClick={() => handleSelect("activity", "Road Trip")}
-                >
+                <div onClick={() => handleSelect("activity", "Road Trip")}>
                   Road Trip
                 </div>
                 <div
@@ -1027,14 +1052,10 @@ function Body() {
                 >
                   Wildlife Safari
                 </div>
-                <div
-                  onClick={() => handleSelect("activity", "Cycling Trip")}
-                >
+                <div onClick={() => handleSelect("activity", "Cycling Trip")}>
                   Cycling Trip
                 </div>
-                <div
-                  onClick={() => handleSelect("activity", "Cultural Tour")}
-                >
+                <div onClick={() => handleSelect("activity", "Cultural Tour")}>
                   Cultural Tour
                 </div>
                 <div
@@ -1042,9 +1063,7 @@ function Body() {
                 >
                   Adventure Sports
                 </div>
-                <div
-                  onClick={() => handleSelect("activity", "Beach Holiday")}
-                >
+                <div onClick={() => handleSelect("activity", "Beach Holiday")}>
                   Beach Holiday
                 </div>
               </div>
@@ -1161,7 +1180,7 @@ function Body() {
             </div>
           </div>
         </div>
-        <button className="search-button">
+        <button className="search-button" onClick={handleSearch}>
           <span>Search</span>
           <svg
             width="20"
@@ -1395,8 +1414,6 @@ function Body() {
       </section>
 
       <section className="home-popular-section" ref={sectionRef}>
-        
-
         <div className="home-popular-container">
           <div className="home-popular-header">
             <p className="home-popular-subtitle">Popular Activities</p>

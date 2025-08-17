@@ -54,7 +54,7 @@ function Navbar() {
                   </svg>
                 </Link>
                 <div className="dropdown-content">
-                  <Link href="#">Destinations 01</Link>
+                  <Link to="/tourlist">Tour list</Link>
                   <Link href="#">Destinations 02</Link>
                   <Link href="#">Destinations Details</Link>
                 </div>

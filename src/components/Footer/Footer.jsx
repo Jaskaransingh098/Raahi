@@ -9,6 +9,7 @@ import {
   Linkedin,
   Instagram,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const ArrowRightIcon = () => (
@@ -188,6 +189,8 @@ function Footer() {
                   <a href="#" className="footer__link">
                     Visa Assistance
                   </a>
+                </li><li>
+                  <a href="/admin-login" className="footer__link">Admin Login</a>
                 </li>
               </ul>
             </div>
@@ -268,7 +271,6 @@ function Footer() {
           </div>
           <p className="footer__copy">
             <span className="copy__brand">©Raahi</span>, All Rights Reserved
-           
           </p>
 
           <ul className="footer__legal">
@@ -287,6 +289,7 @@ function Footer() {
                 FAQs
               </a>
             </li>
+           
           </ul>
         </div>
       </footer>

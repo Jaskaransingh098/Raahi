@@ -1,0 +1,120 @@
+.admin-login-container {
+    display: flex;
+    /* Creates the side-by-side layout */
+    width: 100%;
+    height: 60vh;
+    max-width: 1200px;
+    margin-top: 16%;
+    margin-left: 10%;
+    margin-bottom: 15%;
+    background-color: #ffffff;
+    /* border: 2px solid black; */
+    border-radius: 16px;
+    /* box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.05); */
+    overflow: hidden;
+    /* Important for keeping the image within the rounded corners */
+}
+
+/* ----- Image Section (Left Side) ----- */
+
+.login-image-section {
+    flex: 1;
+    /* Takes up half the space */
+}
+
+.login-image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures the image covers the area without distortion */
+    display: block;
+}
+
+/* ----- Form Section (Right Side) ----- */
+
+.login-form-section {
+    flex: 1;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.login-form-section h2 {
+    color: #1e293b;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.login-form-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-section input {
+    padding: 12px 16px;
+    margin-bottom: 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f8fafc;
+    color: #334155;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form-section input::placeholder {
+    color: #94a3b8;
+}
+
+.login-form-section input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.login-form-section button {
+    padding: 14px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.login-form-section button:hover {
+    background-color: #4338ca;
+}
+
+.error-text {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+}
+
+/* ----- Responsiveness for Mobile ----- */
+
+@media (max-width: 768px) {
+
+    /* Hide the image on smaller screens */
+    .login-image-section {
+        display: none;
+    }
+
+    /* Allow the form to take up the full width */
+    .login-form-section {
+        padding: 2.5rem;
+    }
+
+    .admin-login-container {
+        max-width: 400px;
+        margin: 1rem;
+    }
+}

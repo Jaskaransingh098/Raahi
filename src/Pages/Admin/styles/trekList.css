@@ -1,0 +1,155 @@
+.trek-list-section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.trek-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 340px);
+    gap: 2rem;
+    justify-content: center;
+    text-align: left;
+}
+
+.trek-card {
+    background-color: #ffffff;
+    margin-bottom: 4rem;
+    border-radius: 15px;
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trek-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.trek-image-wrapper {
+    position: relative;
+}
+
+.trek-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.trek-duration,
+.trek-difficulty {
+    position: absolute;
+    top: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.trek-duration {
+    left: 15px;
+}
+
+.trek-difficulty {
+    right: 15px;
+}
+
+.trek-details {
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background-color: #f9f9f9;
+}
+
+.trek-details h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.trek-region {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.trek-description {
+    font-size: 0.92rem;
+    color: #444;
+    line-height: 1.6;
+    max-height: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.trek-description::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 30px;
+    width: 100%;
+    background: linear-gradient(to top, #f9f9f9 50%, transparent);
+}
+
+.trek-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.trek-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.trek-book-btn {
+    padding: 8px 17px;
+    margin-left: 50px;
+    border-radius: 6px;
+    background-color: #1f2937;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.trek-book-btn:hover {
+    background-color: #374151;
+}
+
+.trek-admin-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.trek-admin-buttons button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.trek-admin-buttons button:first-child {
+    background-color: #3498db;
+}
+
+.trek-admin-buttons button:last-child {
+    background-color: #e74c3c;
+}
