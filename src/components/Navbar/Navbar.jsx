@@ -1,34 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Youtube,
+} from "lucide-react";
 import "./Navbar.css";
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState({
     tours: false,
-    destinations: false,
     pages: false,
   });
 
+  const mobileMenuRef = useRef(null);
+
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
   const toggleMobileDropdown = (menu) => {
-    setMobileDropdownOpen((prev) => ({
-      ...prev,
-      [menu]: !prev[menu],
-    }));
+    setMobileDropdownOpen((prev) => {
+      // If the clicked dropdown is already open, close it
+      if (prev[menu]) {
+        return { tours: false, pages: false };
+      }
+
+      // Otherwise close all others and open the clicked one
+      return {
+        tours: false,
+        pages: false,
+        [menu]: true,
+      };
+    });
   };
+
+  // Close menu if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        !event.target.closest(".hamburger-menu")
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobileMenuOpen]);
 
   return (
     <>
+      {/* Desktop Navbar */}
       <header className="site-header">
         <div className="logo-container">
           <div className="logo">
             <img
               src="/home-pics/business-trip.png"
-              alt=""
+              alt="logo"
               className="logo-icon"
             />
             <span>Raahi</span>
@@ -37,299 +76,281 @@ function Navbar() {
         <nav className="navbar">
           <div className="navbar-container">
             <ul className="nav-menu">
-              <li className="nav-item">
+              <li>
                 <Link to="/" className="nav-link">
                   Home
                 </Link>
               </li>
+
               <li className="nav-item dropdown">
                 <Link to="#" className="nav-link">
-                  Tours{" "}
-                  <svg
-                    className="arrow-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 640"
-                  >
-                    <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-                  </svg>
+                  Treks <ChevronDown size={16} className="arrow-svg" />
                 </Link>
                 <div className="dropdown-content">
-                  <Link to="/tourlist">Tour list</Link>
-                  <Link href="#">Destinations 02</Link>
-                  <Link href="#">Destinations Details</Link>
+                  <Link to="/tours">All Treks</Link>
+                  <Link to="/tours?type=SAHYADRI TREKS">Sahyadri Treks</Link>
+                  <Link to="/tours?type=HIMALAYAN TREKS">Himalayan Treks</Link>
+                  <Link to="/tours?type=BIKERS SPECIAL">Bikers Special</Link>
                 </div>
               </li>
+
+              <li>
+                <Link to="/ourgallery" className="nav-link">
+                  Our Gallery
+                </Link>
+              </li>
+              <li>
+                <Link to="/aboutus" className="nav-link">
+                  About us
+                </Link>
+              </li>
+
               <li className="nav-item dropdown">
                 <Link to="#" className="nav-link">
-                  Destinations{" "}
-                  <svg
-                    className="arrow-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 640"
-                  >
-                    <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-                  </svg>
+                  Pages <ChevronDown size={16} className="arrow-svg" />
                 </Link>
                 <div className="dropdown-content">
-                  <Link to="#">Destinations 01</Link>
-                  <Link to="#">Destinations 02</Link>
-                  <Link to="#">Destinations Details</Link>
+                  <Link to="/whyus">Why travel with us</Link>
+                  <Link to="/faq">FAQs</Link>
+                  <Link to="/rules">Rules and Regulations</Link>
+                  <Link to="/cancel">Cancellation policy</Link>
+                  <Link to="/privacy">Privacy policy</Link>
+                  <Link to="/terms">Terms & Conditions</Link>
                 </div>
               </li>
-              <li className="nav-item dropdown">
-                <Link to="#" className="nav-link">
-                  Pages{" "}
-                  <svg
-                    className="arrow-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 640"
-                  >
-                    <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-                  </svg>
-                </Link>
-                <div className="dropdown-content">
-                  <Link to="/aboutus">About Us</Link>
-                  <Link to="/ourgallery">Our Gallery</Link>
-                </div>
-              </li>
-              <li className="nav-item">
-                <Link to="#" className="nav-link">
-                  Blogs{" "}
-                  <svg
-                    className="arrow-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 640"
-                  >
-                    <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-                  </svg>
-                </Link>
-              </li>
-              <li className="nav-item">
+
+              <li>
                 <Link to="/contact" className="nav-link">
                   Contact
                 </Link>
               </li>
             </ul>
+
             <div className="navbar-right">
-              <button className="destination-btn">
-                <Link to="/customise" className="destination-btn-link">Customize Tour</Link>
-                <span className="destination-icon-wrapper">
-                  <svg
-                    className="destination-arrow-svg"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 12h14m-7-7l7 7-7 7"
-                    ></path>
-                  </svg>
-                </span>
-              </button>
+              <Link to="/customise" className="destination-btn-link">
+                <button className="destination-btn">
+                  <span>Customize Tour</span>
+                  <span className="destination-icon-wrapper">
+                    <ArrowRight className="destination-arrow-svg" size={20} />
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
         </nav>
+
+        {/* Mobile Hamburger */}
         <button className="hamburger-menu" onClick={toggleMobileMenu}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
+          {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
       </header>
 
+      {/* Overlay */}
       {isMobileMenuOpen && (
         <div className="mobile-menu-overlay" onClick={toggleMobileMenu}></div>
       )}
 
-      <div className={`mobile-nav-menu ${isMobileMenuOpen ? "open" : ""}`}>
+      {/* Mobile Menu */}
+      <div
+        ref={mobileMenuRef}
+        className={`mobile-nav-menu ${isMobileMenuOpen ? "open" : ""}`}
+      >
         <div className="mobile-menu-header">
           <div className="logo">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16 0L32 9.33333V22.6667L16 32L0 22.6667V9.33333L16 0Z"
-                fill="#4CAF50"
-              />
-              <path
-                d="M16 12L24 16.6667V21.3333L16 26L8 21.3333V16.6667L16 12Z"
-                fill="white"
-              />
-              <path
-                d="M11.3333 15.3333L16 18L20.6667 15.3333L16 12.6667L11.3333 15.3333Z"
-                fill="#A5D6A7"
-              />
-            </svg>
-            <span>Raahi</span>
+            <img
+              src="/home-pics/business-trip.png"
+              alt="logo"
+              className="logo-icon"
+            />
+            <span className="logo-text">Raahi</span>
           </div>
           <button className="close-menu-btn" onClick={toggleMobileMenu}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+            <X size={26} />
           </button>
         </div>
+
         <ul className="mobile-nav-links">
           <li>
-            <a href="/">
-              Home{" "}
-              <svg
-                className="arrow-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 640 640"
-              >
-                <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-              </svg>
-            </a>
+            <Link to="/" onClick={toggleMobileMenu}>
+              Home
+            </Link>
           </li>
 
+          {/* Mobile dropdown: Treks */}
           <li>
             <button
               className="mobile-dropdown-toggle"
               onClick={() => toggleMobileDropdown("tours")}
             >
-              Tours
-              <svg
-                className="arrow-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 640 640"
-              >
-                <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-              </svg>
+              Treks
+              {mobileDropdownOpen.tours ? (
+                <ChevronUp size={18} />
+              ) : (
+                <ChevronDown size={18} />
+              )}
             </button>
             {mobileDropdownOpen.tours && (
               <ul className="mobile-submenu">
                 <li>
-                  <a href="#">Destinations 01</a>
+                  <Link
+                    to="/tours"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    All Treks
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">Destinations 02</a>
+                  <Link
+                    to="/tours?type=SAHYADRI TREKS"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Sahyadri Treks
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">Destinations Details</a>
+                  <Link
+                    to="/tours?type=HIMALAYAN TREKS"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Himalayan Treks
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/tours?type=BIKERS SPECIAL"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Bikers Special
+                  </Link>
                 </li>
               </ul>
             )}
+          </li>
+
+          <li>
+            <Link to="/ourgallery" onClick={toggleMobileMenu}>
+              Our Gallery
+            </Link>
           </li>
           <li>
-            <button
-              className="mobile-dropdown-toggle"
-              onClick={() => toggleMobileDropdown("destinations")}
-            >
-              Destinations
-              <svg
-                className="arrow-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 640 640"
-              >
-                <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-              </svg>
-            </button>
-            {mobileDropdownOpen.destinations && (
-              <ul className="mobile-submenu">
-                <li>
-                  <a href="#">Destinations 01</a>
-                </li>
-                <li>
-                  <a href="#">Destinations 02</a>
-                </li>
-                <li>
-                  <a href="#">Destinations Details</a>
-                </li>
-              </ul>
-            )}
+            <Link to="/aboutus" onClick={toggleMobileMenu}>
+              About us
+            </Link>
           </li>
+
+          {/* Mobile dropdown: Pages */}
           <li>
             <button
               className="mobile-dropdown-toggle"
               onClick={() => toggleMobileDropdown("pages")}
             >
               Pages
-              <svg
-                className="arrow-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 640 640"
-              >
-                <path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
-              </svg>
+              {mobileDropdownOpen.pages ? (
+                <ChevronUp size={18} />
+              ) : (
+                <ChevronDown size={18} />
+              )}
             </button>
             {mobileDropdownOpen.pages && (
               <ul className="mobile-submenu">
                 <li>
-                  <a href="#">Page 1</a>
+                  <Link
+                    to="/whyus"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Why travel with us
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">Page 2</a>
+                  <Link
+                    to="/faq"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    FAQs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/rules"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Rules and Regulations
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/cancel"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Cancellation policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/privacy"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Privacy policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/terms"
+                    onClick={toggleMobileMenu}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Terms & Conditions
+                  </Link>
                 </li>
               </ul>
             )}
           </li>
+
           <li>
-            <a href="#">Contact</a>
+            <Link to="/contact" onClick={toggleMobileMenu}>
+              Contact
+            </Link>
           </li>
         </ul>
-        <button className="mobile-destination-btn">
-          Destination
-          <span className="mobile-destination-icon-wrapper">
-            <svg
-              className="destination-arrow-svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 12h14m-7-7l7 7-7 7"
-              ></path>
-            </svg>
-          </span>
-        </button>
+
+        {/* Customize Tour button */}
+        <Link
+          to="/customise"
+          onClick={toggleMobileMenu}
+          style={{ textDecoration: "none" }}
+        >
+          <button className="mobile-destination-btn">
+            <span style={{ color: "#fff" }}>Customize Tour</span>
+            <span className="mobile-destination-icon-wrapper">
+              <ArrowRight className="destination-arrow-svg" size={20} />
+            </span>
+          </button>
+        </Link>
+
+        {/* Social Links */}
         <div className="follow-us">
           <h4>Follow Us</h4>
           <div className="social-icons">
             <a href="#">
-              <i className="fab fa-facebook-f">f</i>
+              <Facebook size={20} />
             </a>
             <a href="#">
-              <i className="fab fa-twitter">t</i>
+              <Twitter size={20} />
             </a>
             <a href="#">
-              <i className="fab fa-linkedin-in">in</i>
+              <Linkedin size={20} />
             </a>
             <a href="#">
-              <i className="fab fa-youtube">y</i>
+              <Youtube size={20} />
             </a>
           </div>
         </div>

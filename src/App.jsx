@@ -14,6 +14,13 @@ import AdminLogin from "./Pages/Admin/pages/AdminLogin";
 import AdminDashboard from "./Pages/Admin/pages/AdminDashboard";
 import TourList from "./Pages/Admin/components/TourList";
 import TrekList from "./Pages/Admin/components/TrekList";
+import WhyUs from "./Pages/WhyUs/WhyUs";
+import Faq from "./Pages/Faq/Faq";
+import Rules from "./Pages/Rules/Rules";
+import Cancellation from "./Pages/Cancellation/Cancellation";
+import Terms from "./Pages/Terms/Terms";
+import Privacy from "./Pages/Privacy/Privacy";
+import BookNow from "./Pages/BookNow/BookNow";
 
 function App() {
   return (
@@ -30,8 +37,17 @@ function App() {
           <Route path="/customise" element={<Customise />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/tourlist" element={<TourList />} />
+          <Route path="/tours" element={<TourList />} />
           <Route path="/treklist" element={<TrekList />} />
+          <Route path="/whyus" element={<WhyUs />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/cancel" element={<Cancellation />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/book/:id" element={<BookNow />} />
+          
+
         </Routes>
 
         <Footer />

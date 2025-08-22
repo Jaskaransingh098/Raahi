@@ -70,7 +70,7 @@ function Footer() {
               getaway for you.
             </p>
             <button className="exclusive-offer-button">
-              Booking Tours
+              <Link to="/contact" className="exclusive-offer-button2">Book Now</Link>
               <span className="exclusive-offer-button-icon">
                 <ArrowRightIcon />
               </span>
@@ -82,7 +82,7 @@ function Footer() {
             <div className="exclusive-offer-image-wrapper">
               {/* <div className="exclusive-offer-bg-shape"></div> */}
               <img
-                src="https://html.pixelfit.agency/tripex/assets/images/home-one/cta/cta-img1.png"
+                src="/footer/footer-common.png"
                 alt="Traveler holding a ticket and giving a thumbs up"
                 className="exclusive-offer-traveler-img"
               />
@@ -96,10 +96,6 @@ function Footer() {
         aria-labelledby="site-footer-heading"
         ref={footerRef}
       >
-        <h2 id="site-footer-heading" className="sr-only">
-          Site footer
-        </h2>
-
         <div className="footer__container">
           <article className="footer__brand" aria-label="About Tripex">
             <div className="brand__logo" aria-hidden="true">
@@ -130,34 +126,44 @@ function Footer() {
               <h3 className="footer__heading">Quick Links</h3>
               <ul className="footer__list">
                 <li>
-                  <a href="#" className="footer__link">
-                    Tour Listings
-                  </a>
+                  <Link to="/whyus" className="footer__link">
+                    Why Travel with us
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="footer__link">
-                    Destinations
-                  </a>
+                  <Link to="/aboutus" className="footer__link">
+                    About Us
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="footer__link">
-                    Tour Activities
-                  </a>
+                  <Link to="/ourgallery" className="footer__link">
+                    Our Gallery
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="footer__link">
-                    Tour Types
-                  </a>
+                  <Link to="/faq" className="footer__link">
+                    FAQs
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="footer__link">
-                    How It Work
-                  </a>
+                  <Link to="/terms" className="footer__link">
+                    Our Terms & Conditions
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/privacy" className="footer__link">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admin-login" className="footer__link">
+                    Admin Login
+                  </Link>
                 </li>
               </ul>
             </div>
 
-            <div className="footer__col">
+            {/* <div className="footer__col">
               <h3 className="footer__heading">Popular Services</h3>
               <ul className="footer__list">
                 <li>
@@ -189,13 +195,16 @@ function Footer() {
                   <a href="#" className="footer__link">
                     Visa Assistance
                   </a>
-                </li><li>
-                  <a href="/admin-login" className="footer__link">Admin Login</a>
+                </li>
+                <li>
+                  <a href="/admin-login" className="footer__link">
+                    Admin Login
+                  </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
-            <div className="footer__col footer__newsletter">
+            {/* <div className="footer__col footer__newsletter">
               <h3 className="footer__heading">Newsletter</h3>
               <p className="newsletter__hint">Get every travel news update</p>
               <form
@@ -220,7 +229,7 @@ function Footer() {
                   </span>
                 </button>
               </form>
-            </div>
+            </div> */}
 
             <div className="footer__col footer__social">
               <h3 className="footer__heading">Follow Us</h3>
@@ -248,7 +257,7 @@ function Footer() {
 
         <div className="footer__hero" aria-hidden="true">
           <div className={`hero__text ${animate ? "animate-pop" : ""}`}>
-            Travel Adventure
+            Adventure
           </div>
         </div>
 
@@ -270,27 +279,17 @@ function Footer() {
             </svg>
           </div>
           <p className="footer__copy">
-            <span className="copy__brand">©Raahi</span>, All Rights Reserved
+            <span className="copy__brand">©2025 Apex InfoTech Solutions</span>,
+            All Rights Reserved, Design by{" "}
+            <a
+              href="https://www.apexinfotechsolutions.com/"
+              className="copy__brand company-link-apex"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Apex InfoTech Solutions
+            </a>
           </p>
-
-          <ul className="footer__legal">
-            <li>
-              <a href="#" className="footer__link">
-                Privacy policy
-              </a>
-            </li>
-            <li>
-              <a href="#" className="footer__link">
-                Terms & Conditions
-              </a>
-            </li>
-            <li>
-              <a href="#" className="footer__link">
-                FAQs
-              </a>
-            </li>
-           
-          </ul>
         </div>
       </footer>
     </>

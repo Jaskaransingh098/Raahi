@@ -1,6 +1,6 @@
 /* Chrome, Safari, Edge */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -8,7 +8,8 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: orange;
+    /* background: orange; */
+    background: linear-gradient(100deg,rgb(45, 206, 120) 0%, rgb(246, 142, 63) 100%);
     border-radius: 10px;
     /* border: 1px solid #121212; */
 }

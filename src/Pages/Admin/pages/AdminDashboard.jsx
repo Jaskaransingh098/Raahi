@@ -103,7 +103,7 @@ function AdminDashboard() {
 
       {/* Tours Section */}
       <section className="dashboard-section">
-        <h2>Tours</h2>
+        <h2>Treks</h2>
         <button
         className=""
           onClick={() => {
@@ -111,7 +111,7 @@ function AdminDashboard() {
             setShowTourForm(!showTourForm);
           }}
         >
-          {showTourForm ? "Close Form" : "Create Tour"}
+          {showTourForm ? "Close Form" : "Create"}
         </button>
         {showTourForm && (
           <div className="modal-overlay">

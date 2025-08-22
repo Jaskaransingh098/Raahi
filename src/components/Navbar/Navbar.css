@@ -58,6 +58,7 @@
     display: flex;
     align-items: center;
     margin: 0;
+    gap: 30px;
     padding: 0;
 }
 
@@ -146,7 +147,8 @@
     align-items: center;
     font-size: 13px;
 }
-.destination-btn-link{
+
+.destination-btn-link {
     color: #fff;
     text-decoration: none;
 }
@@ -184,6 +186,19 @@
 }
 
 /* Mobile Menu Styles */
+.mobile-menu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.mobile-menu.open {
+    max-height: 500px;
+    /* large enough to fit menu */
+    opacity: 1;
+}
+
 .mobile-menu-overlay {
     position: fixed;
     top: 0;
@@ -210,7 +225,8 @@
     padding: 5px 0;
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 400;
     cursor: pointer;
 }
 
@@ -225,7 +241,7 @@
     padding: 5px 0;
 }
 
-.mobile-submenu a {
+.mobile-submenu li link {
     text-decoration: none;
     color: #333;
 }
@@ -297,8 +313,9 @@
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 0.8rem;
+    padding: 0.8rem 1.2rem;
     border-radius: 50px;
+    gap: 10px;
     cursor: pointer;
     font-weight: 600;
     display: flex;
@@ -306,6 +323,9 @@
     justify-content: space-between;
     font-size: 1rem;
     margin-top: 2rem;
+    text-decoration: none;
+    /* so it doesn’t look like a link */
+    transition: all 0.3s ease;
 }
 
 .mobile-destination-icon-wrapper {
@@ -316,11 +336,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 }
 
-.mobile-destination-btn .destination-arrow-svg {
-    color: #4CAF50;
+.destination-arrow-svg {
+    transition: transform 0.3s ease;
 }
+
+.mobile-destination-btn:hover .destination-arrow-svg {
+    transform: rotate(-40deg);
+}
+
 
 .follow-us {
     margin-top: auto;

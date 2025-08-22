@@ -1,142 +1,278 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FaChevronDown } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import Banner from "../../../components/Banner/Banner";
 import "../styles/tourList.css";
 
-const TourList = ({ isAdmin = false, onEdit, onDelete }) => {
+const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
   const [tours, setTours] = useState([]);
+  const [totalTours, setTotalTours] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
-    axios
-      .get("/api/tours")
-      .then((res) => setTours(res.data))
-      .catch((err) => console.error("Error fetching tours:", err));
-  }, []);
+  const searchParams = new URLSearchParams(location.search);
+  const activity = searchParams.get("activity");
+  const duration = searchParams.get("duration");
+  const price = searchParams.get("price");
 
   const handleBookNowClick = (tourId) => {
     navigate(`/book/${tourId}`);
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const activity = params.get("activity");
+    const duration = params.get("duration");
+    const priceRange = params.get("price");
+    const type = params.get("type");
+
+    axios
+      .get("/api/tours")
+      .then((res) => {
+        setTotalTours(res.data.length);
+
+        let filteredTours = res.data;
+
+        if (type && type !== "All") {
+          filteredTours = filteredTours.filter(
+            (tour) => tour.type?.toLowerCase() === type.toLowerCase()
+          );
+        } else {
+          filteredTours = filteredTours.filter((tour) => {
+            let activityMatch = true;
+            let durationMatch = false;
+            let priceMatch = false;
+
+            // Activity check
+            if (activity && activity !== "All") {
+              activityMatch =
+                tour.category.toLowerCase() === activity.toLowerCase();
+            }
+
+            // Duration check (make it range-based instead of strict equality)
+            if (duration && duration !== "All") {
+              const dur = tour.duration.toLowerCase();
+
+              if (duration === "1 - 3 Days") {
+                durationMatch = /1|2|3/.test(dur);
+              } else if (duration === "4 - 7 Days") {
+                durationMatch = /4|5|6|7/.test(dur);
+              } else if (duration === "8+ Days") {
+                durationMatch = /8|9|10|\+/.test(dur);
+              }
+            }
+
+            // Price check (fix dropdown mismatch: remove spaces)
+            if (priceRange && priceRange !== "All") {
+              const price = Number(tour.price);
+
+              if (priceRange === "Below 5000") priceMatch = price < 5000;
+              if (
+                priceRange === "10000-20000" ||
+                priceRange === "10000 - 20000"
+              ) {
+                priceMatch = price >= 10000 && price <= 20000;
+              }
+              if (priceRange === "Above 20000") priceMatch = price > 20000;
+            }
+
+            if (!activityMatch) return false;
+
+            // if no duration or price selected → allow
+            if (
+              (!duration || duration === "All") &&
+              (!priceRange || priceRange === "All")
+            ) {
+              return true;
+            }
+
+            // ✅ allow if either matches
+            return durationMatch || priceMatch;
+          });
+        }
+
+        setTours(filteredTours);
+      })
+      .catch((err) => console.error("Error fetching tours:", err));
+  }, [location.search]);
+
+  const [sortOption, setSortOption] = useState("default");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const sortedTours = [...tours].sort((a, b) => {
+    if (sortOption === "priceLowHigh") return a.price - b.price;
+    if (sortOption === "priceHighLow") return b.price - a.price;
+    if (sortOption === "durationShort") return a.duration - b.duration;
+    if (sortOption === "durationLong") return b.duration - a.duration;
+    return 0;
+  });
+
+  const options = [
+    { value: "default", label: "Sort By " },
+    { value: "priceLowHigh", label: "Price: Low to High" },
+    { value: "priceHighLow", label: "Price: High to Low" },
+    { value: "durationShort", label: "Duration: Shortest" },
+    { value: "durationLong", label: "Duration: Longest" },
+  ];
+
   return (
     <div className="tour-list-wrapper">
       {!isAdmin && (
-        <>
-          <div className="tour-list-hero-section-discover">
-            <h1 className="tour-list-hero-title">Discover Amazing Tours</h1>
-            <p className="tour-list-hero-subtitle">
-              Explore breathtaking destinations with our carefully curated tour
-              packages designed for unforgettable experiences.
-            </p>
-          </div>
+        <div>
+          <Banner title="Tours" breadcrumb="Tours" />
+          <div className="tour-list-navbar">
+            <span className="tour-list-count">
+              <span className="tour-list-count-number">
+                {sortedTours.length}
+              </span>{" "}
+              Trips found of{" "}
+              <span className="tour-list-count-number-2">{totalTours}</span>
+            </span>
 
-          <div className="tour-list-hero-section-video">
-            <video
-              src="/list-video.mp4"
-              className="tour-list-hero-video"
-              autoPlay
-              loop
-              muted
-              poster="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop"
+            {/* Show user inputs */}
+            <div className="tour-list-search-summary">
+              {/* <span className="list-search-title">Your Search:</span> */}
+              {/* Conditionally render each filter if it exists */}
+              {activity && activity !== "All" && (
+                <span className="summary-item">
+                  <strong>Activity:</strong> {activity}
+                </span>
+              )}
+              {duration && duration !== "All" && (
+                <span className="summary-item">
+                  <strong>Duration:</strong> {duration}
+                </span>
+              )}
+              {price && price !== "All" && (
+                <span className="summary-item">
+                  <strong>Price:</strong> {price}
+                </span>
+              )}
+            </div>
+
+            {/* Sorting */}
+            <div
+              className="smooth-dropdown"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
             >
-              Your browser does not support the video tag.
-            </video>
+              <div className="smooth-dropdown-header">
+                {options.find((o) => o.value === sortOption)?.label}
+                <FaChevronDown
+                  className={`dropdown-arrow ${dropdownOpen ? "open" : ""}`}
+                />
+              </div>
+              <ul
+                className={`smooth-dropdown-list ${dropdownOpen ? "open" : ""}`}
+              >
+                {options.map((option) => (
+                  <li
+                    key={option.value}
+                    onClick={() => {
+                      setSortOption(option.value);
+                      setDropdownOpen(false);
+                    }}
+                  >
+                    {option.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </>
+        </div>
       )}
-
       <div className="tour-list-search-results-section">
-        {!isAdmin && <h2 className="tour-list-section-title">Our Tours</h2>}
+        {/* {!isAdmin && <h2 className="tour-list-section-title">Our Tours</h2>} */}
         <div className="tour-list-container">
-          {Array.isArray(tours) && tours.length > 0 ? (
-            tours.map((tour) => (
-              <div className="tour-list-card" key={tour._id}>
-                {/* Image Section */}
-                <div className="tour-list-card-image-wrapper">
+          {Array.isArray(sortedTours) && sortedTours.length > 0 ? (
+            sortedTours.map((tour) => (
+              <div className="tour-card" key={tour._id}>
+                <div className="tour-card-image-wrapper">
                   <img
                     src={tour.image}
                     alt={tour.title}
-                    className="tour-list-card-image"
+                    className="tour-card-image"
                   />
-                  <div className="tour-list-card-duration-badge">
-                    {tour.duration}
+                  <div className="tour-card-badge-container">
+                    {tour.discount > 0 && (
+                      <span className="tour-card-badge discount-badge">
+                        {tour.discount}% Off
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                {/* Details */}
-                <div className="tour-list-details">
-
-                  {/* Title */}
-                  <h3 className="tour-list-card-title">{tour.title}</h3>
-
-                  {/* Location */}
-                  <p className="tour-list-card-location">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    {tour.location}
-                  </p>
-
-                  {/* Description */}
-                  <p className="tour-list-card-description">
-                    {tour.description}
-                  </p>
-
-                  {/* Footer Grid */}
-                  <div className="tour-list-card-footer-grid">
-                    <div className="tour-list-footer-item">
-                      <span className="footer-label">💲 Price</span>
-                      <span className="footer-value">₹{tour.price}</span>
-                    </div>
-                    <div className="tour-list-footer-item">
-                      <span className="footer-label">📍 Place</span>
-                      <span className="footer-value">
-                        {tour.places || "N/A"}
-                      </span>
-                    </div>
-                    <div className="tour-list-footer-item">
-                      <span className="footer-label">👥 Guest</span>
-                      <span className="footer-value">
-                        {tour.guests || "N/A"}
-                      </span>
+                <div className="tour-card-details">
+                  <div>
+                    {" "}
+                    <h3 className="tour-card-title">{tour.title}</h3>
+                    <p className="tour-card-description">
+                      {tour.description.length > 120
+                        ? `${tour.description.substring(0, 120)}...`
+                        : tour.description}
+                    </p>
+                    <div className="tour-card-info-items">
+                      <div className="tour-card-info-item">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>{tour.location}</span>
+                      </div>
+                      <div className="tour-card-info-item">
+                        <svg
+                          xmlns="http://www.w.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>{tour.duration}</span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Buttons */}
-                  {isAdmin ? (
-                    <div className="tour-list-admin-buttons">
-                      <button
-                        className="tour-list-edit-btn"
-                        onClick={() => onEdit(tour)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="tour-list-delete-btn"
-                        onClick={() => onDelete(tour._id)}
-                      >
-                        Delete
-                      </button>
+                  <div className="tour-card-bottom">
+                    <div className="tour-card-price-section">
+                      <span className="tour-card-price-from">From</span>
+                      <span className="tour-card-price">${tour.price}</span>
                     </div>
-                  ) : (
-                    <button
-                      className="tour-list-book-btn"
-                      onClick={() => handleBookNowClick(tour._id)}
-                    >
-                      Book Now
-                    </button>
-                  )}
+
+                    {!isAdmin && (
+                      <button
+                        className="tour-card-book-btn"
+                        onClick={() => handleBookNowClick(tour._id)}
+                      >
+                        Book Now <span className="arrow">→</span>
+                      </button>
+                    )}
+
+                    {isAdmin && (
+                      <div className="tour-card-admin-buttons">
+                        <button onClick={() => onEdit(tour)}>Edit</button>
+                        <button onClick={() => onDelete(tour._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             ))

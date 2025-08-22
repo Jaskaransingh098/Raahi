@@ -1,0 +1,228 @@
+.why-us-hero {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    margin: 60px auto;
+    max-width: 1400px;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.why-us-hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    filter: brightness(0.6);
+    z-index: 1;
+}
+
+.why-us-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.why-us-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.why-us-hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #e5e7eb;
+}
+
+/* --- Intro Section --- */
+.why-us-intro-section {
+    padding: 80px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.why-us-intro-image {
+    flex: 1.3;
+}
+
+.why-us-intro-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.why-us-intro-text {
+    flex: 1.2;
+}
+
+.why-us-intro-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.why-us-intro-text p {
+    color: #475569;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* --- Philosophy Section --- */
+.why-us-philosophy-section {
+    padding: 80px 20px;
+    background-color: #f8f9fa;
+}
+
+.why-us-philosophy-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.why-us-philosophy-container h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.why-us-philosophy-container .why-us-subtitle {
+    color: #f97316;
+    font-weight: 600;
+}
+
+.why-us-philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.why-us-philosophy-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.why-us-philosophy-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #f0fdf4;
+    color: #22c55e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+}
+
+.why-us-philosophy-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.why-us-philosophy-card p {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* --- Guides Section (New) --- */
+.why-us-guides-section {
+    padding: 80px 20px;
+    background-color: #1f2937;
+    color: white;
+}
+
+.why-us-guides-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.why-us-guides-container .why-us-subtitle {
+    color: #f97316;
+    font-weight: 600;
+}
+
+.why-us-guides-container h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.why-us-guides-container>p {
+    color: #d1d5db;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    line-height: 1.7;
+}
+
+.why-us-guides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.why-us-guide-feature {
+    background-color: #374151;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: left;
+}
+
+.why-us-guide-icon {
+    color: #22c55e;
+    margin-bottom: 15px;
+}
+
+.why-us-guide-feature h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.why-us-guide-feature p {
+    color: #d1d5db;
+    line-height: 1.6;
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .why-us-intro-section {
+        flex-direction: column;
+    }
+
+    .why-us-philosophy-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why-us-guides-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .why-us-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .why-us-philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+}

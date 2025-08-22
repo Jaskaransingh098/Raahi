@@ -3,14 +3,15 @@
     /* Creates the side-by-side layout */
     width: 100%;
     height: 60vh;
-    max-width: 1200px;
-    margin-top: 16%;
+    max-width: 1450px;
+    padding: 60px;
     margin-left: 10%;
     margin-bottom: 15%;
+    margin: 90px auto;
     background-color: #ffffff;
     /* border: 2px solid black; */
     border-radius: 16px;
-    /* box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.05); */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     /* Important for keeping the image within the rounded corners */
 }
@@ -18,7 +19,8 @@
 /* ----- Image Section (Left Side) ----- */
 
 .login-image-section {
-    flex: 1;
+    flex: 0.8;
+    height: 25em;
     /* Takes up half the space */
 }
 
@@ -33,7 +35,7 @@
 /* ----- Form Section (Right Side) ----- */
 
 .login-form-section {
-    flex: 1;
+    flex: 0.7;
     padding: 3rem;
     display: flex;
     flex-direction: column;
@@ -116,5 +118,51 @@
     .admin-login-container {
         max-width: 400px;
         margin: 1rem;
+    }
+}
+
+/* ----- Responsiveness for Mobile ----- */
+@media (max-width: 768px) {
+
+    /* Container adjustments */
+    .admin-login-container {
+        flex-direction: column;
+        /* stack sections vertically */
+        height: auto;
+        padding: 20px;
+        margin: 40px auto;
+        max-width: 95%;
+    }
+
+    /* Hide the image on smaller screens */
+    .login-image-section {
+        display: none;
+    }
+
+    /* Form section takes full width */
+    .login-form-section {
+        flex: 1;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .login-form-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .login-form-section input {
+        padding: 10px 14px;
+        font-size: 0.95rem;
+    }
+
+    .login-form-section button {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    .error-text {
+        font-size: 0.8rem;
+        margin-top: 1rem;
     }
 }

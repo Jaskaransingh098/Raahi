@@ -1,0 +1,335 @@
+.booknow-page {
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #f8f9fa; */
+    padding: 40px 20px;
+}
+
+.booknow-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Header --- */
+.booknow-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.booknow-header-img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+/* --- Main Content --- */
+.booknow-main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* --- Left Column --- */
+.booknow-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.booknow-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.booknow-tour-info h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 15px 0 10px 0;
+}
+
+.booknow-meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.booknow-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.booknow-rating .star-icon {
+    color: #f59e0b;
+}
+
+.booknow-description h2,
+.booknow-benefits h2,
+.booknow-contact-form-card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.booknow-description p {
+    color: #475569;
+    line-height: 1.8;
+}
+
+.booknow-benefits-list {
+    list-style: none;
+    padding: 0;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.booknow-benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    color: #475569;
+    break-inside: avoid-column;
+}
+
+.booknow-check-icon {
+    color: #22c55e;
+}
+
+.booknow-trip-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.booknow-trip-info-item {
+    text-align: center;
+}
+
+.booknow-trip-info-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #f0fdf4;
+    color: #22c55e;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+}
+
+.booknow-trip-info-item strong {
+    display: block;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.booknow-trip-info-item span {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.booknow-included-excluded {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.booknow-included-excluded h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.booknow-included-excluded ul {
+    list-style: none;
+    padding: 0;
+}
+
+.booknow-included-excluded li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #475569;
+}
+
+.booknow-included-excluded .excluded .x-icon {
+    color: #ef4444;
+}
+
+/* --- Right Column (Sidebar) --- */
+.booknow-right-col {
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.booknow-share-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booknow-share-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.booknow-share-icons a {
+    color: #6b7280;
+    transition: color 0.3s ease;
+}
+
+.booknow-share-icons a:hover {
+    color: #1e293b;
+}
+
+.booknow-pricing-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.booknow-price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.booknow-price-item .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.booknow-price-item .original-price {
+    text-decoration: line-through;
+    color: #9ca3af;
+    margin-right: 8px;
+}
+
+/* --- Contact Form --- */
+.booknow-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.booknow-form-row {
+    display: flex;
+    gap: 35px;
+    margin-top: 20px;
+}
+
+.booknow-form-row input {
+    flex: 1;
+    /* makes both inputs equal width */
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.booknow-contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    resize: vertical;
+    min-height: 120px;
+    margin-bottom: 30px;
+}
+
+.booknow-contact-form button {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.booknow-contact-form button:hover {
+    background-color: #16a34a;
+}
+
+@media (max-width: 768px) {
+    .booknow-header {
+        grid-template-columns: 1fr;
+        /* stack image + details */
+    }
+
+    .booknow-main-content {
+        grid-template-columns: 1fr;
+        /* stack left + right */
+    }
+
+    .booknow-included-excluded {
+        grid-template-columns: 1fr;
+        /* stack included/excluded */
+    }
+
+    .booknow-benefits-list {
+        columns: 1;
+        /* only 1 column in mobile */
+    }
+
+    .booknow-form-row {
+        flex-direction: column;
+        /* stack inputs */
+        gap: 15px;
+    }
+
+    .booknow-form-row input {
+        width: 100%;
+        /* full width inputs */
+    }
+
+    .booknow-contact-form textarea {
+        min-height: 100px;
+    }
+
+    .booknow-header-img {
+        height: 220px;
+        /* smaller hero image */
+    }
+
+    .booknow-card {
+        padding: 20px;
+    }
+
+    .booknow-tour-info h1 {
+        font-size: 1.5rem;
+    }
+
+    .booknow-description h2,
+    .booknow-benefits h2,
+    .booknow-contact-form-card h2 {
+        font-size: 1.2rem;
+    }
+}

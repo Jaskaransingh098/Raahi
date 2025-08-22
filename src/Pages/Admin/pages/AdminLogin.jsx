@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/adminLogin.css"; // create your own styles
-import { div } from "framer-motion/client";
 
 const AdminLogin = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
@@ -38,7 +37,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
         <div className="login-image-section">
           {/* You can use any image URL here */}
           <img
-            src="/admin.svg"
+            src="/admin/admin.jpg"
             alt="Abstract illustration of code"
           />
         </div>

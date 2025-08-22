@@ -8,6 +8,7 @@ const CreateTour = ({ onClose, initialData = null }) => {
     title: "",
     description: "",
     price: "",
+    discount: "",
     duration: "",
     location: "",
     category: "",
@@ -25,7 +26,15 @@ const CreateTour = ({ onClose, initialData = null }) => {
   }, [initialData]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+
+    // First letter capital for text inputs
+    if (["title", "location", "category"].includes(name) && value.length > 0) {
+      value = value.charAt(0).toUpperCase() + value.slice(1);
+    }
+
+    // setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleImageChange = (e) => {
@@ -41,6 +50,9 @@ const CreateTour = ({ onClose, initialData = null }) => {
       submitData.append("title", formData.title);
       submitData.append("description", formData.description);
       submitData.append("price", Number(formData.price));
+      if (formData.discount !== "") {
+        submitData.append("discount", Number(formData.discount));
+      }
       submitData.append("duration", formData.duration);
       submitData.append("location", formData.location);
       submitData.append("category", formData.category);
@@ -75,6 +87,7 @@ const CreateTour = ({ onClose, initialData = null }) => {
         title: "",
         description: "",
         price: "",
+        discount: "",
         duration: "",
         location: "",
         category: "",
@@ -91,9 +104,9 @@ const CreateTour = ({ onClose, initialData = null }) => {
 
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
-      <h2>{initialData ? "Edit Tour" : "Create New Tour"}</h2>
+      <h2>{initialData ? "Edit Tour" : "Create New"}</h2>
 
-      {/* <select
+      <select
         name="type"
         className="admin-input-type"
         value={formData.type}
@@ -105,7 +118,7 @@ const CreateTour = ({ onClose, initialData = null }) => {
         <option value="HIMALAYAN TREKS">HIMALAYAN TREKS</option>
         <option value="BIKERS SPECIAL">BIKERS SPECIAL</option>
         <option value="BACKPACKING TOURS">BACKPACKING TOURS</option>
-      </select> */}
+      </select>
 
       <input
         type="text"
@@ -131,14 +144,19 @@ const CreateTour = ({ onClose, initialData = null }) => {
         onChange={handleChange}
         required
       />
-      <input
-        type="text"
+      <select
         name="duration"
-        placeholder="Duration (e.g., 3 Days / 2 Nights)"
+        className="admin-input-type"
         value={formData.duration}
         onChange={handleChange}
         required
-      />
+      >
+        <option value="">Select Duration</option>
+        <option value="1 - 3 Days">1 - 3 Days</option>
+        <option value="4 - 7 Days">4 - 7 Days</option>
+        <option value="8+ Days">8+ Days</option>
+      </select>
+
       <input
         type="number"
         name="price"
@@ -146,6 +164,13 @@ const CreateTour = ({ onClose, initialData = null }) => {
         value={formData.price}
         onChange={handleChange}
         required
+      />
+      <input
+        type="number"
+        name="discount"
+        placeholder="Only number, no %"
+        value={formData.discount}
+        onChange={handleChange}
       />
       <textarea
         name="description"
@@ -169,7 +194,7 @@ const CreateTour = ({ onClose, initialData = null }) => {
         required={!initialData} // Required only for new tour
       />
 
-      <button type="submit">{initialData ? "Update Tour" : "Add Tour"}</button>
+      <button type="submit">{initialData ? "Update" : "Add"}</button>
       <button type="button" onClick={onClose}>
         Cancel
       </button>

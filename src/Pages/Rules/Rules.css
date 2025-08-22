@@ -1,0 +1,209 @@
+.rules-regulation-page {
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #f8f9fa; */
+    /* padding: 80px 20px; */
+}
+
+.rules-regulation-container {
+    max-width: 1300px;
+    margin: 70px auto;
+}
+
+/* --- Header --- */
+.rules-regulation-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.rules-regulation-header .rules-regulation-subtitle {
+    background-color: #f0fdf4;
+    color: #22c55e;
+    padding: 8px 16px;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.rules-regulation-header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 15px 0;
+}
+
+.rules-regulation-header p {
+    color: #475569;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* --- Main Content Grid --- */
+.rules-regulation-main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* --- Important Notes Card --- */
+.rules-regulation-notes-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.rules-regulation-notes-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.rules-regulation-notes-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #fff7ed;
+    /* Light Orange */
+    color: #f97316;
+    /* Orange */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rules-regulation-notes-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.rules-regulation-notes-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+    list-style: none;
+    padding: 0;
+}
+
+.rules-regulation-notes-list li {
+    color: #475569;
+    line-height: 1.7;
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 20px;
+}
+
+.rules-regulation-notes-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #22c55e;
+    font-weight: 700;
+}
+
+/* --- Sidebar --- */
+.rules-regulation-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.rules-regulation-sidebar-image {
+    width: 100%;
+    height: 30em;
+    /* border-radius: 16px; */
+    /* object-fit: cover; */
+}
+
+/* --- Lower Cards Grid --- */
+.rules-regulation-lower-grid {
+    margin-top: 90px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.rules-regulation-policy-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.rules-regulation-policy-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.rules-regulation-policy-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.rules-regulation-policy-icon.covid {
+    background-color: #60a5fa;
+}
+
+.rules-regulation-policy-icon.safety {
+    background-color: #f472b6;
+}
+
+.rules-regulation-policy-icon.unused {
+    background-color: #a78bfa;
+}
+
+.rules-regulation-policy-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.rules-regulation-policy-card p {
+    color: #475569;
+    margin-bottom: 20px;
+    line-height: 2;
+    font-size: 0.9rem;
+}
+
+.rules-regulation-policy-card p strong {
+    color: #1e293b;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .rules-regulation-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rules-regulation-sidebar {
+        order: -1;
+        margin-bottom: 30px;
+    }
+
+    .rules-regulation-lower-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .rules-regulation-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .rules-regulation-notes-list {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import CountUp from "react-countup";
+import axios from "axios";
+import { Star, ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import "./Body.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const AwardIcon = () => (
   <svg
@@ -176,21 +178,18 @@ function Body() {
   const [startCounting, setStartCounting] = useState(false);
   const statsRef = useRef(null);
 
-  const [selectedDestination, setSelectedDestination] =
-    useState("Where to next");
   const [selectedActivity, setSelectedActivity] = useState("Trip Type");
   const [selectedDuration, setSelectedDuration] = useState("Select Duration");
-  const [selectedGuests, setSelectedGuests] = useState("Number of Guests");
+  const [selectedPrice, setSelectedPrice] = useState("Select Price");
 
   const toggleDropdown = (dropdownName) => {
     setOpenDropdown((prev) => (prev === dropdownName ? null : dropdownName));
   };
 
   const handleSelect = (dropdownName, value) => {
-    if (dropdownName === "destinations") setSelectedDestination(value);
     if (dropdownName === "activity") setSelectedActivity(value);
     if (dropdownName === "duration") setSelectedDuration(value);
-    if (dropdownName === "guests") setSelectedGuests(value);
+    if (dropdownName === "price") setSelectedPrice(value);
     setOpenDropdown(null); // Close dropdown after selecting
   };
 
@@ -198,13 +197,12 @@ function Body() {
 
   const handleSearch = () => {
     const queryParams = new URLSearchParams({
-      destination: selectedDestination,
       activity: selectedActivity,
       duration: selectedDuration,
-      guests: selectedGuests,
+      price: selectedPrice,
     }).toString();
 
-    navigate(`/search-results?${queryParams}`);
+    navigate(`/tours?${queryParams}`);
   };
 
   // Effect to add and clean up mouse move event listener
@@ -336,145 +334,45 @@ function Body() {
     const walk = (x - startX) * 2; // The multiplier increases scroll speed
     sliderRef.current.scrollLeft = scrollLeft - walk;
   };
-
-  const tours = [
-    {
-      id: 1,
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tag: "Popular",
-      tagColor: "orange",
-      duration: "3 Days - 2 Night",
-      rating: 4.5,
-      reviews: "2k",
-      title: "Viewpoint at Nangyuan Island",
-      location: "Bali, Indonesia",
-      description:
-        "Being dramatically 200 meters above the surrounding jungle, this ancient rock...",
-      price: 350,
-      maxGroup: 7,
-      guest: 2,
-    },
-    {
-      id: 2,
-      image:
-        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      duration: "3 Days - 2 Night",
-      rating: 4.5,
-      reviews: "2k",
-      title: "Pool relaxation garden",
-      location: "Bali, Indonesia",
-      description:
-        "Being dramatically 200 meters above the surrounding jungle, this ancient rock...",
-      price: 350,
-      maxGroup: 7,
-      guest: 2,
-    },
-    {
-      id: 3,
-      image:
-        "https://images.unsplash.com/photo-1586798271654-09511b3af8a3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tag: "Honeymoon",
-      tagColor: "blue",
-      duration: "3 Days - 2 Night",
-      rating: 4.5,
-      reviews: "2k",
-      title: "Beautiful Diamond Beach",
-      location: "Bali, Indonesia",
-      description:
-        "Being dramatically 200 meters above the surrounding jungle, this ancient rock...",
-      price: 350,
-      maxGroup: 7,
-      guest: 2,
-    },
-    {
-      id: 4,
-      image:
-        "https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      duration: "3 Days - 2 Night",
-      rating: 4.5,
-      reviews: "2k",
-      title: "Nangyuan Island(Thailand)",
-      location: "Phuket",
-      description:
-        "Being dramatically 200 meters above the surrounding jungle, this ancient rock...",
-      price: 350,
-      maxGroup: 7,
-      guest: 2,
-    },
-    {
-      id: 5,
-      image:
-        "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tag: "Adventure",
-      tagColor: "orange",
-      duration: "5 Days - 4 Nights",
-      rating: 4.8,
-      reviews: "3.1k",
-      title: "Santorini Caldera Trail",
-      location: "Santorini, Greece",
-      description:
-        "Hike along the stunning caldera cliffs, offering breathtaking views of the Aegean Sea.",
-      price: 600,
-      maxGroup: 10,
-      guest: 2,
-    },
-    {
-      id: 6,
-      image:
-        "https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tag: "Culture",
-      tagColor: "blue",
-      duration: "7 Days - 6 Nights",
-      rating: 4.9,
-      reviews: "4.5k",
-      title: "Kyoto Ancient Temples Tour",
-      location: "Kyoto, Japan",
-      description:
-        "Explore the serene beauty of Kinkaku-ji, Fushimi Inari, and other historic temples.",
-      price: 850,
-      maxGroup: 8,
-      guest: 2,
-    },
-    {
-      id: 7,
-      image:
-        "https://images.unsplash.com/photo-1506741474023-4a136a035e08?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      duration: "4 Days - 3 Nights",
-      rating: 4.6,
-      reviews: "1.8k",
-      title: "Great Ocean Road Discovery",
-      location: "Victoria, Australia",
-      description:
-        "Witness the majestic Twelve Apostles and lush rainforests on this iconic road trip.",
-      price: 420,
-      maxGroup: 12,
-      guest: 2,
-    },
-    {
-      id: 8,
-      image:
-        "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tag: "Nature",
-      tagColor: "orange",
-      duration: "3 Days - 2 Night",
-      rating: 4.7,
-      reviews: "2.5k",
-      title: "Banff National Park Lakes",
-      location: "Alberta, Canada",
-      description:
-        "Experience the turquoise waters of Lake Louise and Moraine Lake in the Rockies.",
-      price: 550,
-      maxGroup: 6,
-      guest: 2,
-    },
-  ];
-
+  const [tours, setTours] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardsPerPage = 4; // As seen in the image
+  const [cardsPerPage, setCardsPerPage] = useState(4);
+
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        const response = await axios.get("/api/tours");
+        // Assuming the API returns tours sorted by latest first, we take the top 8
+        setTours(response.data.slice(0, 8));
+      } catch (error) {
+        console.error("Error fetching tours:", error);
+        // Optionally, set some default or error state
+      }
+    };
+
+    fetchTours();
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setCardsPerPage(1);
+      } else if (window.innerWidth <= 992) {
+        setCardsPerPage(2);
+      } else if (window.innerWidth <= 1200) {
+        setCardsPerPage(3);
+      } else {
+        setCardsPerPage(4);
+      }
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const nextSlide = () => {
     const newIndex = currentIndex + 1;
+    // Allow sliding until the last group of cards is fully visible
     if (newIndex <= tours.length - cardsPerPage) {
       setCurrentIndex(newIndex);
     }
@@ -487,7 +385,11 @@ function Body() {
     }
   };
 
-  const totalPages = Math.ceil(tours.length / cardsPerPage);
+  const totalPages =
+    tours.length > 0 ? Math.ceil(tours.length / cardsPerPage) : 0;
+  const isPrevDisabled = currentIndex === 0;
+  const isNextDisabled =
+    tours.length <= cardsPerPage || currentIndex >= tours.length - cardsPerPage;
 
   const adventureTypes = [
     { icon: <TentIcon />, name: "Tent Camping" },
@@ -612,26 +514,30 @@ function Body() {
   const features = [
     {
       icon: <ExpertlyExperiencesIcon />,
-      title: "Expertly Experiences",
-      description: "We specialize in journeys that blend comfort culture",
+      title: "Expertly Guided Experiences",
+      description:
+        "From Himalayan treks to Ladakh bike rides, our expert team ensures every adventure is safe, thrilling, and well-planned.",
       isCenter: false,
     },
     {
       icon: <SeamlessTravelPlanIcon />,
-      title: "Seamless Travel Plan",
-      description: "We make the entire process smooth and stress-free",
+      title: "Seamless Adventure Plan",
+      description:
+        "We handle all the details — permits, routes, safety, and support — so you can focus only on the journey.",
       isCenter: true,
     },
     {
       icon: <AllInclusivePackagesIcon />,
-      title: "All-Inclusive Packages",
-      description: "From flights accommodation sightseeing and activities",
+      title: "All-Inclusive Adventure Packages",
+      description:
+        "From transport and stay to gear, meals, and activities — we’ve got everything covered for a hassle-free trip.",
       isCenter: false,
     },
     {
       icon: <PassionateQualityTravelIcon />,
-      title: "Passionate Quality Travel",
-      description: "We are genuinely dedicated turning dream vacation",
+      title: "Passion for Quality Adventure",
+      description:
+        "We’re truly dedicated to creating adventures that inspire, challenge, and leave you with memories for life.",
       isCenter: true,
     },
   ];
@@ -679,7 +585,7 @@ function Body() {
     <>
       <section className="hero-section">
         {/* Background decorative icons with parallax effect */}
-        <div className="hero-background-icons">
+        {/* <div className="hero-background-icons">
           <div className="bg-icon icon-plane" style={calculateParallax(30)}>
             <svg
               width="80"
@@ -860,25 +766,26 @@ function Body() {
               />
             </svg>
           </div>
-        </div>
+        </div> */}
 
         {/* Main content grid */}
         <div className="hero-content-grid">
           <div className="hero-text-content">
-            <p className="hero-welcome-text">Welcome to Travel & Adventure</p>
+            <p className="hero-welcome-text">Welcome to Trek & Adventure</p>
             <h1 className="hero-headline">
-              Explore Beyond
+              Conquer New Heights
               <br />
-              Limits, <img
+              Embrace, <img
                 src="/home-pics/hero-thumb-img.jpg"
                 alt="travel"
               />{" "}
-              Travel
+              Trek & Adventure
               <br />
-              Beyond Ordinary
+              Beyond Boundaries
             </h1>
             <p className="hero-subheading">
-              More than 10,300+ most popular destinations
+              Discover 10,000+ trails, peaks, and adventure experiences
+              worldwide
             </p>
             <div className="hero-buttons">
               <button className="btn btn-explore">Explore More</button>
@@ -886,7 +793,7 @@ function Body() {
           </div>
           <div className="hero-image-content">
             <img
-              src="/home-pics/hero-img1.png"
+              src="/home-pics/hero-main2.png"
               alt="Tourist with luggage"
               className="hero-main-image"
             />
@@ -912,7 +819,7 @@ function Body() {
         {/* Search bar at the bottom */}
       </section>
       <div className="hero-search-bar">
-        <div className="search-field">
+        {/* <div className="search-field">
           <div className="search-field-icon">
             <svg
               width="20"
@@ -993,7 +900,7 @@ function Body() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="search-field">
           <div className="search-field-icon">
             <svg
@@ -1041,30 +948,14 @@ function Body() {
                 <div onClick={() => handleSelect("activity", "Trekking")}>
                   Trekking
                 </div>
-                <div onClick={() => handleSelect("activity", "Camping")}>
-                  Camping
+                <div onClick={() => handleSelect("activity", "Ladakh Special")}>
+                  Ladakh Special
                 </div>
-                <div onClick={() => handleSelect("activity", "Road Trip")}>
-                  Road Trip
+                <div onClick={() => handleSelect("activity", "Family Special")}>
+                  Family Special
                 </div>
-                <div
-                  onClick={() => handleSelect("activity", "Wildlife Safari")}
-                >
-                  Wildlife Safari
-                </div>
-                <div onClick={() => handleSelect("activity", "Cycling Trip")}>
-                  Cycling Trip
-                </div>
-                <div onClick={() => handleSelect("activity", "Cultural Tour")}>
-                  Cultural Tour
-                </div>
-                <div
-                  onClick={() => handleSelect("activity", "Adventure Sports")}
-                >
-                  Adventure Sports
-                </div>
-                <div onClick={() => handleSelect("activity", "Beach Holiday")}>
-                  Beach Holiday
+                <div onClick={() => handleSelect("activity", "Biker Special")}>
+                  Biker Special
                 </div>
               </div>
             </div>
@@ -1125,32 +1016,15 @@ function Body() {
           </div>
         </div>
         <div className="search-field">
-          <div className="search-field-icon">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-          </div>
+          <div className="search-field-icon">&#8377;</div>
           <div className="search-field-content">
-            <label>Guests</label>
+            <label>Price</label>
             <div className="custom-dropdown">
               <button
                 className="dropdown-toggle"
-                onClick={() => toggleDropdown("guests")}
+                onClick={() => toggleDropdown("price")}
               >
-                {selectedGuests}
+                {selectedPrice}
                 <svg width="16" height="16" viewBox="0 0 16 16">
                   <path
                     fillRule="evenodd"
@@ -1164,17 +1038,17 @@ function Body() {
               </button>
               <div
                 className={`dropdown-menu ${
-                  openDropdown === "guests" ? "show" : ""
+                  openDropdown === "price" ? "show" : ""
                 }`}
               >
-                <div onClick={() => handleSelect("guests", "1 - 2 People")}>
-                  1 - 2 People
+                <div onClick={() => handleSelect("price", "Below 5000")}>
+                  Below 5,000
                 </div>
-                <div onClick={() => handleSelect("guests", "3 - 5 People")}>
-                  3 - 5 People
+                <div onClick={() => handleSelect("price", "10000-20000")}>
+                  10,000 - 20,000
                 </div>
-                <div onClick={() => handleSelect("guests", "6+ People")}>
-                  6+ People
+                <div onClick={() => handleSelect("price", "Above 20000")}>
+                  Above 20,000
                 </div>
               </div>
             </div>
@@ -1200,10 +1074,10 @@ function Body() {
       </div>
       <div className="destinations-section">
         <div className="destinations-header">
-          <p className="popular-destinations">Popular Destinations</p>
+          <p className="popular-destinations">Popular Adventures</p>
           <h2>
-            Discover The Amazing Tours Places <br /> Around World,{" "}
-            <span className="highlight">50+</span> Countries
+            From thrilling treks to epic bike rides and more, <br /> experience
+            most <span className="highlight">unforgettable</span> journeys
           </h2>
         </div>
         <div
@@ -1236,7 +1110,7 @@ function Body() {
           <div className="home-aboutus-left">
             <div className="home-aboutus-image-wrapper">
               <img
-                src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="/home-pics/home-about-us1.jpg"
                 alt="Resort pool from above"
                 className="home-aboutus-image-main"
               />
@@ -1249,7 +1123,7 @@ function Body() {
                 <p>We're Award Winning Travel Agency</p>
               </div>
               <img
-                src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="/home-pics/home-about-us.jpg"
                 alt="Beach with palm trees"
                 className="home-aboutus-image-secondary"
               />
@@ -1260,14 +1134,15 @@ function Body() {
           <div className="home-aboutus-right">
             <p className="home-aboutus-subtitle">Know About Us</p>
             <h2 className="home-aboutus-title">
-              We Believe That Travel is More than Just Visiting New Places
-              Experience
+              We Believe Adventure is More Than Just a Journey
             </h2>
             <p className="home-aboutus-description">
-              We don't just plan trips—we craft unforgettable experiences. With
-              expertise, personalized service, and a deep passion for travel, we
-              ensure every journey is smooth, safe, and inspiring. From
-              handpicked accommodations
+              We don’t just organize treks and rides—we craft unforgettable
+              adventures. With expert guidance, personalized service, and a true
+              passion for the outdoors, we ensure every experience is thrilling,
+              safe, and inspiring. From Himalayan treks to bike expeditions
+              across Ladakh, every detail is designed to make your journey
+              extraordinary.
             </p>
             <div className="home-aboutus-features">
               <div className="home-aboutus-feature-item">
@@ -1283,7 +1158,7 @@ function Body() {
               <div className="home-aboutus-feature-item">
                 <SafetyTravelIcon />
                 <div>
-                  <h4>Safety Travel</h4>
+                  <h4>Safety Adventure</h4>
                   <p>
                     We go above and beyond ensure that your journey not
                     exciting.
@@ -1311,9 +1186,9 @@ function Body() {
 
       <section className="top-picks-section">
         <div className="top-picks-header">
-          <p className="top-picks-subtitle">Popular Tour</p>
+          <p className="top-picks-subtitle">Latest Adventures</p>
           <h2 className="top-picks-title">
-            Top Picks for the Ultimate Journey
+            Top Upcoming for the Ultimate Adventure
           </h2>
         </div>
         <div className="top-picks-carousel-wrapper">
@@ -1322,65 +1197,53 @@ function Body() {
               className="top-picks-track"
               style={{
                 transform: `translateX(-${
-                  currentIndex * (100 / cardsPerPage)
+                  currentIndex *
+                  (100 /
+                    (tours.length > cardsPerPage ? cardsPerPage : tours.length))
                 }%)`,
               }}
             >
-              {/* Tour Card JSX is now directly mapped here */}
               {tours.map((tour) => (
-                <div className="top-picks-card" key={tour.id}>
+                <div className="top-picks-card" key={tour._id}>
                   <div className="top-picks-card-image-container">
                     <img
                       src={tour.image}
                       alt={tour.title}
                       className="top-picks-card-image"
                     />
-                    {tour.tag && (
-                      <span className={`top-picks-card-tag ${tour.tagColor}`}>
-                        {tour.tag}
-                      </span>
-                    )}
                     <span className="top-picks-card-duration">
                       {tour.duration}
                     </span>
                   </div>
                   <div className="top-picks-card-content">
-                    <div className="top-picks-card-rating">
-                      <div>
-                        {[...Array(5)].map((_, i) => (
-                          <StarIcon
-                            key={i}
-                            filled={i < Math.floor(tour.rating)}
-                          />
-                        ))}
-                      </div>
-                      <span>
-                        {tour.rating} ({tour.reviews} reviews)
-                      </span>
-                    </div>
                     <h3 className="top-picks-card-title">{tour.title}</h3>
-                    <p className="top-picks-card-location">{tour.location}</p>
+                    <p className="top-picks-card-location">
+                      <MapPin size={14} /> {tour.location}
+                    </p>
                     <p className="top-picks-card-description">
                       {tour.description}
                     </p>
-                    <div className="top-picks-card-divider"></div>
-                    <div className="top-picks-card-details">
-                      <div>
-                        <span>Price</span>
-                        <strong>${tour.price}</strong>
+                    <div className="top-picks-card-footer">
+                      <div className="top-picks-card-price">
+                        {tour.discount > 0 && (
+                          <span className="original-price">₹{tour.price}</span>
+                        )}
+                        <span>
+                          ₹
+                          {tour.discount
+                            ? (tour.price * (1 - tour.discount / 100)).toFixed(
+                                0
+                              )
+                            : tour.price}
+                        </span>
                       </div>
-                      <div>
-                        <span>Max Group</span>
-                        <strong>{tour.maxGroup}</strong>
-                      </div>
-                      <div>
-                        <span>Guest</span>
-                        <strong>{tour.guest}</strong>
-                      </div>
+                      <Link
+                        to={`/book/${tour._id}`}
+                        className="top-picks-card-book-btn"
+                      >
+                        Book Now <ArrowRight size={16} />
+                      </Link>
                     </div>
-                    <button className="top-picks-card-button">
-                      Book Now <span>+</span>
-                    </button>
                   </div>
                 </div>
               ))}
@@ -1389,16 +1252,16 @@ function Body() {
           <button
             onClick={prevSlide}
             className="top-picks-arrow left"
-            disabled={currentIndex === 0}
+            disabled={isPrevDisabled}
           >
-            <ArrowLeftIcon />
+            <ArrowLeft />
           </button>
           <button
             onClick={nextSlide}
             className="top-picks-arrow right"
-            disabled={currentIndex >= tours.length - cardsPerPage}
+            disabled={isNextDisabled}
           >
-            <ArrowRightIcon />
+            <ArrowRight />
           </button>
         </div>
         <div className="top-picks-dots">
@@ -1412,7 +1275,6 @@ function Body() {
           ))}
         </div>
       </section>
-
       <section className="home-popular-section" ref={sectionRef}>
         <div className="home-popular-container">
           <div className="home-popular-header">
@@ -1470,7 +1332,7 @@ function Body() {
             </div>
           </div>
 
-          <div className="home-popular-offers-grid">
+          {/* <div className="home-popular-offers-grid">
             <div className="home-popular-offer-card offer-1">
               <div className="home-popular-offer-content">
                 <span className="offer-tag">Supper Offer Services</span>
@@ -1498,7 +1360,7 @@ function Body() {
                 alt="Girl with yellow suitcase"
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -1552,13 +1414,14 @@ function Body() {
           <div className="discovery-right">
             <p className="discovery-subtitle">Discover Your</p>
             <h2 className="discovery-title">
-              Enjoy Adventure trip around the world
+              Enjoy Adventure Trips Across India
             </h2>
             <p className="discovery-description">
-              Travel isn't just about destinations — it's about discovery,
-              connection, and unforgettable experiences. With a passion for
-              exploration and years of industry expertise, we craft personalized
-              journeys
+              Adventure isn’t just about reaching a destination — it’s about
+              discovery, thrill, and unforgettable moments. From trekking the
+              Himalayas to riding through Ladakh, camping in the wilderness, or
+              rafting down rivers, we craft experiences that inspire every
+              explorer.
             </p>
             <div className="discovery-details-wrapper">
               <img
@@ -1576,9 +1439,12 @@ function Body() {
                 <li>
                   <CheckmarkIcon /> Save & Security Travels
                 </li>
-                <button className="discovery-cta-button">
-                  Start Your Tourn <span>+</span>
-                </button>
+                <Link className="discovery-cta-button">
+                  Start Your Tourn{" "}
+                  <span className="exclusive-offer-button-icon">
+                    <ArrowRightIcon />
+                  </span>
+                </Link>
               </ul>
             </div>
           </div>
@@ -1599,7 +1465,7 @@ function Body() {
             <div className="testimonials-left">
               <div className="testimonials-image-collage">
                 <img
-                  src="https://html.pixelfit.agency/tripex/assets/images/home-one/testimonial/testimonial-img3.png"
+                  src="/home-pics/home-testimonial1.jpg"
                   alt="Traveler with globe"
                   className="testimonials-main-img"
                 />
@@ -1675,7 +1541,7 @@ function Body() {
             <div className="why-choose-us-header">
               <p className="why-choose-us-subtitle">Why Choose Us</p>
               <h2 className="why-choose-us-title">
-                We Make Travel Easy & Memorable
+                We Make Adventures Easy & Unforgettable
               </h2>
             </div>
             <div className="why-choose-us-features-grid">
@@ -1700,7 +1566,7 @@ function Body() {
           <div className="why-choose-us-right">
             <div className="why-choose-us-image-wrapper">
               <img
-                src="https://html.pixelfit.agency/tripex/assets/images/home-one/gallery/choose-img1.png"
+                src="/home-pics/home-why.jpg"
                 alt="Airplane"
                 className="why-choose-us-plane-img"
               />
