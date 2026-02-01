@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import api from "../../api";
 
 export default function SearchResults() {
   const { search } = useLocation();
@@ -11,7 +12,7 @@ export default function SearchResults() {
       setLoading(true);
 
       try {
-        const res = await fetch(`https://your-backend.com/api/tours${search}`);
+        const res = await api.get(`/api/tours${search}`);
         const data = await res.json();
         setTours(data);
       } catch (err) {

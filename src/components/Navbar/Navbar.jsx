@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
   X,
@@ -59,85 +59,96 @@ function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
     <>
       {/* Desktop Navbar */}
-      <header className="site-header">
-        <div className="logo-container">
-          <div className="logo">
-            <img
-              src="/home-pics/business-trip.png"
-              alt="logo"
-              className="logo-icon"
-            />
-            <span>Raahi</span>
-          </div>
-        </div>
-        <nav className="navbar">
-          <div className="navbar-container">
-            <ul className="nav-menu">
-              <li>
-                <Link to="/" className="nav-link">
-                  Home
-                </Link>
-              </li>
+      <header className={`site-header ${isHome ? "home-page" : "other-page"}`}>
+        <div className="navbar-section">
+          <nav className={`navbar ${isHome ? "home-navbar" : "other-navbar"}`}>
+            <div className="navbar-container">
+              <div className="logo">
+                <img
+                  src="/logo/logo-1.png"
+                  alt="logo"
+                  className="logo-icon"
+                />
+                {/* <span className={`logo-text ${isHome ? "" : "other-text"}`}>
+                  Wonderland
+                  <br />
+                  <span
+                    className={`logo-text1 ${isHome ? "" : "other-text1"}`}
+                  >Himalayas</span>
+                </span> */}
+              </div>
+              <ul className={`nav-menu ${isHome ? "" : "other-text"}`}>
+                <li>
+                   <Link to="/" className={`nav-link ${isHome ? "" : "other-text"}`}>
+                    Home
+                  </Link>
+                </li>
 
-              <li className="nav-item dropdown">
-                <Link to="#" className="nav-link">
-                  Treks <ChevronDown size={16} className="arrow-svg" />
-                </Link>
-                <div className="dropdown-content">
-                  <Link to="/tours">All Treks</Link>
-                  <Link to="/tours?type=SAHYADRI TREKS">Sahyadri Treks</Link>
-                  <Link to="/tours?type=HIMALAYAN TREKS">Himalayan Treks</Link>
-                  <Link to="/tours?type=BIKERS SPECIAL">Bikers Special</Link>
-                </div>
-              </li>
+                <li className="nav-item dropdown">
+                  <Link to="#" className={`nav-link ${isHome ? "" : "other-text"}`}>
+                    Adventures <ChevronDown size={16} className="arrow-svg" />
+                  </Link>
+                  <div className="dropdown-content">
+                    <Link to="/tours">All Adventures</Link>
+                    {/* <Link to="/tours?type=SAHYADRI TREKS">Sahyadri Treks</Link> */}
+                    <Link to="/tours?type=HIMALAYAN TREKS">
+                      Himalayan Treks
+                    </Link>
+                    <Link to="/tours?type=BIKERS SPECIAL">Bikers Special</Link>
+                  </div>
+                </li>
 
-              <li>
-                <Link to="/ourgallery" className="nav-link">
-                  Our Gallery
-                </Link>
-              </li>
-              <li>
-                <Link to="/aboutus" className="nav-link">
-                  About us
-                </Link>
-              </li>
+                <li>
+                  <Link to="/ourgallery" className={`nav-link ${isHome ? "" : "other-text"}`}>
+                    Our Gallery
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/aboutus" className={`nav-link ${isHome ? "" : "other-text"}`}>
+                    About us
+                  </Link>
+                </li>
 
-              <li className="nav-item dropdown">
-                <Link to="#" className="nav-link">
-                  Pages <ChevronDown size={16} className="arrow-svg" />
-                </Link>
-                <div className="dropdown-content">
-                  <Link to="/whyus">Why travel with us</Link>
-                  <Link to="/faq">FAQs</Link>
-                  <Link to="/rules">Rules and Regulations</Link>
-                  <Link to="/cancel">Cancellation policy</Link>
-                  <Link to="/privacy">Privacy policy</Link>
-                  <Link to="/terms">Terms & Conditions</Link>
-                </div>
-              </li>
+                <li className="nav-item dropdown">
+                  <Link to="#" className={`nav-link ${isHome ? "" : "other-text"}`}>
+                    Pages <ChevronDown size={16} className="arrow-svg" />
+                  </Link>
+                  <div className="dropdown-content">
+                    <Link to="/whyus">Why travel with us</Link>
+                    <Link to="/faq">FAQs</Link>
+                    <Link to="/rules">Rules and Regulations</Link>
+                    <Link to="/cancel">Cancellation policy</Link>
+                    <Link to="/privacy">Privacy policy</Link>
+                    <Link to="/terms">Terms & Conditions</Link>
+                  </div>
+                </li>
 
-              <li>
-                <Link to="/contact" className="nav-link">
-                  Contact
-                </Link>
-              </li>
-            </ul>
+                <li>
+                  <Link to="/contact" className={`nav-link ${isHome ? "" : "other-text"}`}>
+                    Contact
+                  </Link>
+                </li>
+              </ul>
 
-            <div className="navbar-right">
-              <Link to="/customise" className="destination-btn-link">
-                <button className="destination-btn">
-                  <span>Customize Tour</span>
-                  <span className="destination-icon-wrapper">
-                    <ArrowRight className="destination-arrow-svg" size={20} />
-                  </span>
-                </button>
-              </Link>
+              <div className="navbar-right">
+                <Link to="/customise" className="destination-btn-link">
+                  <button className="destination-btn">
+                    <span>Customize Tour</span>
+                    <span className="destination-icon-wrapper">
+                      <ArrowRight className="destination-arrow-svg" size={20} />
+                    </span>
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav>
+        </div>
 
         {/* Mobile Hamburger */}
         <button className="hamburger-menu" onClick={toggleMobileMenu}>
@@ -158,15 +169,15 @@ function Navbar() {
         <div className="mobile-menu-header">
           <div className="logo">
             <img
-              src="/home-pics/business-trip.png"
+              src="/logo/logo-1.png"
               alt="logo"
               className="logo-icon"
             />
-            <span className="logo-text">Raahi</span>
+            <span className="logo-text"></span>
           </div>
-          <button className="close-menu-btn" onClick={toggleMobileMenu}>
+          {/* <button className="close-menu-btn" onClick={toggleMobileMenu}>
             <X size={26} />
-          </button>
+          </button> */}
         </div>
 
         <ul className="mobile-nav-links">
@@ -182,7 +193,7 @@ function Navbar() {
               className="mobile-dropdown-toggle"
               onClick={() => toggleMobileDropdown("tours")}
             >
-              Treks
+              Adventures
               {mobileDropdownOpen.tours ? (
                 <ChevronUp size={18} />
               ) : (
@@ -195,25 +206,25 @@ function Navbar() {
                   <Link
                     to="/tours"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
-                    All Treks
+                    All adventures
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     to="/tours?type=SAHYADRI TREKS"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Sahyadri Treks
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     to="/tours?type=HIMALAYAN TREKS"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Himalayan Treks
                   </Link>
@@ -222,7 +233,7 @@ function Navbar() {
                   <Link
                     to="/tours?type=BIKERS SPECIAL"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Bikers Special
                   </Link>
@@ -261,7 +272,7 @@ function Navbar() {
                   <Link
                     to="/whyus"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Why travel with us
                   </Link>
@@ -270,7 +281,7 @@ function Navbar() {
                   <Link
                     to="/faq"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     FAQs
                   </Link>
@@ -279,7 +290,7 @@ function Navbar() {
                   <Link
                     to="/rules"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Rules and Regulations
                   </Link>
@@ -288,7 +299,7 @@ function Navbar() {
                   <Link
                     to="/cancel"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Cancellation policy
                   </Link>
@@ -297,7 +308,7 @@ function Navbar() {
                   <Link
                     to="/privacy"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Privacy policy
                   </Link>
@@ -306,7 +317,7 @@ function Navbar() {
                   <Link
                     to="/terms"
                     onClick={toggleMobileMenu}
-                    style={{ fontSize: "0.8rem" }}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Terms & Conditions
                   </Link>
@@ -337,9 +348,9 @@ function Navbar() {
         </Link>
 
         {/* Social Links */}
-        <div className="follow-us">
+        {/* <div className="follow-us">
           <h4>Follow Us</h4>
-          <div className="social-icons">
+          <div className="social-icons-navbar">
             <a href="#">
               <Facebook size={20} />
             </a>
@@ -353,7 +364,7 @@ function Navbar() {
               <Youtube size={20} />
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

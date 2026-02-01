@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../../../api";
 import "../styles/adminLogin.css"; // create your own styles
 
 const AdminLogin = ({ onLoginSuccess }) => {
@@ -12,21 +13,21 @@ const AdminLogin = ({ onLoginSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/admin/login", {
+      const res = await api.post("/api/admin/login", {
         username,
         password,
       });
 
-      console.log("Response:", res.data); // ✅ Add this line
+      console.log("Response:", res.data); 
 
       if (res.data.success) {
-        localStorage.setItem("adminAuth", "true"); // ✅ Store login flag
+        localStorage.setItem("adminAuth", "true");
         navigate("/admin/dashboard");
       } else {
         setError("Invalid username or password");
       }
     } catch (err) {
-      console.error("Login error:", err.response?.data || err.message); // ✅ Log error response
+      console.error("Login error:", err.response?.data || err.message); 
       setError("Something went wrong. Please try again.");
     }
   };
@@ -35,14 +36,14 @@ const AdminLogin = ({ onLoginSuccess }) => {
     <div className="admin-login">
       <div className="admin-login-container">
         <div className="login-image-section">
-          {/* You can use any image URL here */}
+         
           <img
             src="/admin/admin.jpg"
             alt="Abstract illustration of code"
           />
         </div>
 
-        {/* 2. Right Section: For the Form */}
+       
         <div className="login-form-section">
           <h2>Admin Login</h2>
           <form onSubmit={handleSubmit}>

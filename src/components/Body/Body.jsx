@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import CountUp from "react-countup";
 import axios from "axios";
 import { Star, ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import api from "../../api";
+import CardSwap, { Card } from "../AutoCardSwap/CardSwap";
 import "./Body.css";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -217,42 +219,36 @@ function Body() {
   }, []);
 
   const destinations = [
+    // {
+    //   image:
+    //     "https://i.redd.it/beautiful-sahyadri-mountain-ranges-v0-piiwbrx7fuad1.jpg?width=3119&format=pjpg&auto=webp&s=77c370c3d5dbd2490dbccd994c23789a87f38fd1",
+    //   tours: "10",
+    //   country: "Shayadri",
+    // },
     {
       image:
-        "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tours: "10 Tours",
-      country: "Switzerland",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg/960px-Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg",
+      tours: "10",
+      country: "Himalayan Treks",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tours: "10 Tours",
-      country: "Thailand",
+        "https://www.swantour.com/blogs/wp-content/uploads/2019/05/Leh-Ladakh-Bike-Trip.jpg",
+      tours: "08",
+      country: "Bikers Special",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tours: "08 Tours",
-      country: "Italy",
+        "https://adventureconsultants.com/uploads/Landing-Pages/Home/Pheriche-trekking-Caro-1000x.jpg",
+      tours: "10",
+      country: "Customized",
     },
-    {
-      image:
-        "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tours: "10 Tours",
-      country: "Switzerland",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1502602898657-3e91760c0337?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tours: "08 Tours",
-      country: "France",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1542317854-f9593e157879?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tours: "4 Tours",
-      country: "Tours",
-    },
+    // {
+    //   image:
+    //     "https://images.blacktomato.com/2024/07/Ladakh3.jpg?auto=compress%2Cformat&fit=crop&h=800&ixlib=php-3.3.1&q=82&w=1520&s=5451be49358d2a7f8142ecf8fbfc2f8d",
+    //   tours: "08",
+    //   country: "Ladakh",
+    // },
   ];
 
   const sliderRef = useRef(null);
@@ -341,12 +337,10 @@ function Body() {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const response = await axios.get("/api/tours");
-        // Assuming the API returns tours sorted by latest first, we take the top 8
+        const response = await api.get("/api/tours");
         setTours(response.data.slice(0, 8));
       } catch (error) {
         console.error("Error fetching tours:", error);
-        // Optionally, set some default or error state
       }
     };
 
@@ -456,30 +450,43 @@ function Body() {
   const testimonialsData = [
     {
       id: 1,
-      author: "Michael S. Heslin",
-      title: "World Traveler",
-      avatar: "https://i.pravatar.cc/150?img=5",
+      author: "Jatin Kumar",
+      email: "Jatin10@gmail.com",
       rating: 5,
       quote:
-        "“Even when we had small hiccup with our hotel check-in to support team handled it immediately. It's rare to find such travel and family responsive!”",
+        "Even when we had a small hiccup with our hotel check-in, the support team handled it immediately. Very responsive and professional.",
     },
     {
       id: 2,
-      author: "Sarah Jennings",
-      title: "Adventure Seeker",
-      avatar: "https://i.pravatar.cc/150?img=6",
-      rating: 5,
+      author: "Pooja",
+      email: "poojasingh0@gmail.com",
+      rating: 4,
       quote:
-        "“The entire trip was flawlessly organized. From the flights to the tours, everything was perfect. I can't wait to book my next adventure with them.”",
+        "The trip was well organized and smooth overall. The itinerary was great and the team was very helpful throughout.",
     },
     {
       id: 3,
-      author: "David Chen",
-      title: "Family Vacationer",
-      avatar: "https://i.pravatar.cc/150?img=7",
+      author: "Arvind Singh",
+      email: "arvindsinghhh@gmail.com",
+      rating: 5,
+      quote:
+        "A memorable experience for my family. The guides were friendly and the planning was excellent.",
+    },
+    {
+      id: 4,
+      author: "Aman Sharma",
+      email: "amansharma2000@gmail.com",
       rating: 4,
       quote:
-        "“A truly memorable experience for my family. The guides were knowledgeable and friendly, and the itinerary was packed with amazing activities.”",
+        "Loved the destinations and support. Everything was managed nicely and we felt safe during the entire journey.",
+    },
+    {
+      id: 5,
+      author: "Arjun Malhotra",
+      email: "arjun.malhotra@gmail.com",
+      rating: 5,
+      quote:
+        "An amazing Himalayan experience! Highly recommended for anyone looking for a well-planned adventure.",
     },
   ];
 
@@ -581,498 +588,47 @@ function Body() {
   ];
   const extendedLogos = [...logos, ...logos];
 
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
+
   return (
     <>
-      <section className="hero-section">
-        {/* Background decorative icons with parallax effect */}
-        {/* <div className="hero-background-icons">
-          <div className="bg-icon icon-plane" style={calculateParallax(30)}>
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M22 12.67C22 12.22 21.78 11.8 21.38 11.64L15.35 9.27L13.5 3.5C13.34 3.1 12.93 2.81 12.5 2.81C12.07 2.81 11.66 3.1 11.5 3.5L9.65 9.27L3.62 11.64C3.22 11.8 3 12.22 3 12.67C3 13.12 3.22 13.54 3.62 13.7L9.65 16.07L11.5 21.84C11.66 22.24 12.07 22.53 12.5 22.53C12.93 22.53 13.34 22.24 13.5 21.84L15.35 16.07L21.38 13.7C21.78 13.54 22 13.12 22 12.67Z"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div className="bg-icon icon-balloon" style={calculateParallax(20)}>
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 22C16.4183 22 20 18.4183 20 14C20 9.58172 16.4183 6 12 6C7.58172 6 4 9.58172 4 14C4 18.4183 7.58172 22 12 22Z"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12 2V6"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12 14L8 22"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12 14L16 22"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M5 12H3"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M21 12H19"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div className="bg-icon icon-coconut" style={calculateParallax(25)}>
-            <svg
-              width="70"
-              height="70"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M15.5 15.5C15.5 16.3284 14.8284 17 14 17C13.1716 17 12.5 16.3284 12.5 15.5C12.5 14.6716 13.1716 14 14 14C14.8284 14 15.5 14.6716 15.5 15.5Z"
-                fill="#4CAF50"
-              />
-              <path
-                d="M8.5 15.5C8.5 16.3284 7.82843 17 7 17C6.17157 17 5.5 16.3284 5.5 15.5C5.5 14.6716 6.17157 14 7 14C7.82843 14 8.5 14.6716 8.5 15.5Z"
-                fill="#4CAF50"
-              />
-              <path
-                d="M12 12C10.8954 12 10 11.1046 10 10"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-          <div className="bg-icon icon-luggage" style={calculateParallax(15)}>
-            <svg
-              width="70"
-              height="70"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="6"
-                y="4"
-                width="12"
-                height="18"
-                rx="2"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M10 4V2H14V4"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M6 10H18"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div className="bg-icon icon-cloud" style={calculateParallax(10)}>
-            <svg
-              width="100"
-              height="100"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18 10H20C21.1046 10 22 10.8954 22 12C22 13.1046 21.1046 14 20 14H18"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M6 10H4C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14H6"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12 18V20C12 21.1046 11.1046 22 10 22H8"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12 18V20C12 21.1046 12.8954 22 14 22H16"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M16 6C16 3.79086 14.2091 2 12 2C9.79086 2 8 3.79086 8 6C8 8.20914 9.79086 10 12 10H16C18.2091 10 20 8.20914 20 6C20 3.79086 18.2091 2 16 2Z"
-                stroke="#4CAF50"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        </div> */}
+      <section class="hero-section">
+        <video
+          autoPlay
+          loop
+          muted
+          nocontrols
+          class="hero-video"
+          src="/home-pics/hero-video.mp4"
+        ></video>
 
-        {/* Main content grid */}
-        <div className="hero-content-grid">
-          <div className="hero-text-content">
-            <p className="hero-welcome-text">Welcome to Trek & Adventure</p>
-            <h1 className="hero-headline">
-              Conquer New Heights
-              <br />
-              Embrace, <img
-                src="/home-pics/hero-thumb-img.jpg"
-                alt="travel"
-              />{" "}
-              Trek & Adventure
-              <br />
-              Beyond Boundaries
-            </h1>
-            <p className="hero-subheading">
-              Discover 10,000+ trails, peaks, and adventure experiences
-              worldwide
-            </p>
-            <div className="hero-buttons">
-              <button className="btn btn-explore">Explore More</button>
-            </div>
-          </div>
-          <div className="hero-image-content">
-            <img
-              src="/home-pics/hero-main2.png"
-              alt="Tourist with luggage"
-              className="hero-main-image"
-            />
-          </div>
-        </div>
+        <div class="hero-overlay"></div>
 
-        <div className="svg-shape-wrapper">
-          <svg className="wave" viewBox="0 0 2 1" preserveAspectRatio="none">
-            <defs>
-              <path
-                id="w"
-                d="M0 1V0.5 Q0.5 1 1 0.5 T2 0.5 3 0.5 4 0.5 V1 Z"
-              ></path>
-            </defs>
-            <g>
-              <use href="#w" fill="rgba(236, 225, 201, 0.81)"></use>
-            </g>
-          </svg>
-          <svg className="wave" viewBox="0 0 2 1" preserveAspectRatio="none">
-            <use href="#w" fill="rgba(236, 225, 201, 0.81)"></use>
-          </svg>
+        <div className="scroll-down-arrow">
+          <span></span>
         </div>
-        {/* Search bar at the bottom */}
       </section>
-      <div className="hero-search-bar">
-        {/* <div className="search-field">
-          <div className="search-field-icon">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-          </div>
-          <div className="search-field-content">
-            <label>Destinations</label>
-            <div className="custom-dropdown">
-              <button
-                className="dropdown-toggle"
-                onClick={() => toggleDropdown("destinations")}
-              >
-                {selectedDestination}
-                <svg width="16" height="16" viewBox="0 0 16 16">
-                  <path
-                    fillRule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8
-10.293l5.646-5.647a.5.5 0 0 1
-.708.708l-6 6a.5.5 0 0
-1-.708 0l-6-6a.5.5 0 0 1
-0-.708z"
-                  />
-                </svg>
-              </button>
-              <div
-                className={`dropdown-menu ${
-                  openDropdown === "destinations" ? "show" : ""
-                }`}
-              >
-                <div
-                  onClick={() =>
-                    handleSelect("destinations", "All Destinations")
-                  }
-                >
-                  All Destinations
-                </div>
-                <div
-                  onClick={() =>
-                    handleSelect("destinations", "Himachal Pradesh")
-                  }
-                >
-                  Himachal Pradhesh
-                </div>
-                <div onClick={() => handleSelect("destinations", "Uttrakhand")}>
-                  Uttrakhand
-                </div>
-                <div onClick={() => handleSelect("destinations", "Rajasthan")}>
-                  Rajasthan
-                </div>
-                <div onClick={() => handleSelect("destinations", "Goa")}>
-                  Goa
-                </div>
-                <div onClick={() => handleSelect("destinations", "Ladakh")}>
-                  Ladakh
-                </div>
-                <div onClick={() => handleSelect("destinations", "Bhutan")}>
-                  Bhutan
-                </div>
-                <div onClick={() => handleSelect("destinations", "Nepal")}>
-                  Nepal
-                </div>
-                <div
-                  onClick={() => handleSelect("destinations", "International")}
-                >
-                  International
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        <div className="search-field">
-          <div className="search-field-icon">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-          </div>
-          <div className="search-field-content">
-            <label>Activity</label>
-            <div className="custom-dropdown">
-              <button
-                className="dropdown-toggle"
-                onClick={() => toggleDropdown("activity")}
-              >
-                {selectedActivity}
-                <svg width="16" height="16" viewBox="0 0 16 16">
-                  <path
-                    fillRule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8
-10.293l5.646-5.647a.5.5 0 0 1
-.708.708l-6 6a.5.5 0 0
-1-.708 0l-6-6a.5.5 0 0 1
-0-.708z"
-                  />
-                </svg>
-              </button>
 
-              <div
-                className={`dropdown-menu ${
-                  openDropdown === "activity" ? "show" : ""
-                }`}
-              >
-                <div onClick={() => handleSelect("activity", "Trekking")}>
-                  Trekking
-                </div>
-                <div onClick={() => handleSelect("activity", "Ladakh Special")}>
-                  Ladakh Special
-                </div>
-                <div onClick={() => handleSelect("activity", "Family Special")}>
-                  Family Special
-                </div>
-                <div onClick={() => handleSelect("activity", "Biker Special")}>
-                  Biker Special
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="search-field">
-          <div className="search-field-icon">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-          </div>
-          <div className="search-field-content">
-            <label>Duration</label>
-            <div className="custom-dropdown">
-              <button
-                className="dropdown-toggle"
-                onClick={() => toggleDropdown("duration")}
-              >
-                {selectedDuration}
-                <svg width="16" height="16" viewBox="0 0 16 16">
-                  <path
-                    fillRule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8
-10.293l5.646-5.647a.5.5 0 0 1
-.708.708l-6 6a.5.5 0 0
-1-.708 0l-6-6a.5.5 0 0 1
-0-.708z"
-                  />
-                </svg>
-              </button>
-              <div
-                className={`dropdown-menu ${
-                  openDropdown === "duration" ? "show" : ""
-                }`}
-              >
-                <div onClick={() => handleSelect("duration", "1 - 3 Days")}>
-                  1 - 3 Days
-                </div>
-                <div onClick={() => handleSelect("duration", "4 - 7 Days")}>
-                  4 - 7 Days
-                </div>
-                <div onClick={() => handleSelect("duration", "8+ Days")}>
-                  8+ Days
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="search-field">
-          <div className="search-field-icon">&#8377;</div>
-          <div className="search-field-content">
-            <label>Price</label>
-            <div className="custom-dropdown">
-              <button
-                className="dropdown-toggle"
-                onClick={() => toggleDropdown("price")}
-              >
-                {selectedPrice}
-                <svg width="16" height="16" viewBox="0 0 16 16">
-                  <path
-                    fillRule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8
-10.293l5.646-5.647a.5.5 0 0 1
-.708.708l-6 6a.5.5 0 0
-1-.708 0l-6-6a.5.5 0 0 1
-0-.708z"
-                  />
-                </svg>
-              </button>
-              <div
-                className={`dropdown-menu ${
-                  openDropdown === "price" ? "show" : ""
-                }`}
-              >
-                <div onClick={() => handleSelect("price", "Below 5000")}>
-                  Below 5,000
-                </div>
-                <div onClick={() => handleSelect("price", "10000-20000")}>
-                  10,000 - 20,000
-                </div>
-                <div onClick={() => handleSelect("price", "Above 20000")}>
-                  Above 20,000
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button className="search-button" onClick={handleSearch}>
-          <span>Search</span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-      </div>
       <div className="destinations-section">
+        <div className="hero-content">
+          <div className="text-container">
+            <div
+              className={`hero-masked-text ${animate ? "animate-pop" : ""}`}
+              aria-hidden="true"
+            >
+              Welcome to
+              <br />
+              Eco
+              <br />
+              Explorers
+            </div>
+          </div>
+        </div>
+
         <div className="destinations-header">
           <p className="popular-destinations">Popular Adventures</p>
           <h2>
@@ -1089,14 +645,19 @@ function Body() {
           onMouseMove={onMouseMove}
         >
           {extendedDestinations.map((dest, index) => (
-            <div className="destination-card" key={index}>
+            <div
+              className="destination-card"
+              key={index}
+              onClick={() => navigate(`/ourgallery?category=${dest.country}`)}
+              style={{ cursor: "grab" }}
+            >
               <img
                 src={dest.image}
                 alt={dest.country}
                 className="destination-image"
               />
               <div className="destination-info">
-                <span className="tours-count">{dest.tours}</span>
+                {/* <span className="tours-count">{dest.tours}</span> */}
                 <p className="country-name">{dest.country}</p>
               </div>
             </div>
@@ -1113,19 +674,6 @@ function Body() {
                 src="/home-pics/home-about-us1.jpg"
                 alt="Resort pool from above"
                 className="home-aboutus-image-main"
-              />
-              <div className="home-aboutus-discount-badge">
-                <span className="home-aboutus-discount-percent">23%</span>
-                <span className="home-aboutus-discount-text">Discount</span>
-              </div>
-              <div className="home-aboutus-award-box">
-                <AwardIcon />
-                <p>We're Award Winning Travel Agency</p>
-              </div>
-              <img
-                src="/home-pics/home-about-us.jpg"
-                alt="Beach with palm trees"
-                className="home-aboutus-image-secondary"
               />
             </div>
           </div>
@@ -1168,7 +716,12 @@ function Body() {
             </div>
             <div className="home-aboutus-footer">
               <button className="home-aboutus-cta-button">
-                Learn More Us
+                <Link
+                  to="/aboutus"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Learn More{" "}
+                </Link>
                 {/* <span>+</span> */}
               </button>
               <div className="home-aboutus-clients">
@@ -1177,190 +730,112 @@ function Body() {
                   <img src="https://i.pravatar.cc/40?img=2" alt="Client 2" />
                   <img src="https://i.pravatar.cc/40?img=3" alt="Client 3" />
                 </div>
-                <p>10m+ Trusted Clients</p>
+                <p>3k Trusted Clients</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="top-picks-section">
-        <div className="top-picks-header">
-          <p className="top-picks-subtitle">Latest Adventures</p>
-          <h2 className="top-picks-title">
-            Top Upcoming for the Ultimate Adventure
-          </h2>
-        </div>
-        <div className="top-picks-carousel-wrapper">
-          <div className="top-picks-carousel">
-            <div
-              className="top-picks-track"
-              style={{
-                transform: `translateX(-${
-                  currentIndex *
-                  (100 /
-                    (tours.length > cardsPerPage ? cardsPerPage : tours.length))
-                }%)`,
-              }}
-            >
-              {tours.map((tour) => (
-                <div className="top-picks-card" key={tour._id}>
-                  <div className="top-picks-card-image-container">
-                    <img
-                      src={tour.image}
-                      alt={tour.title}
-                      className="top-picks-card-image"
-                    />
-                    <span className="top-picks-card-duration">
-                      {tour.duration}
-                    </span>
-                  </div>
-                  <div className="top-picks-card-content">
-                    <h3 className="top-picks-card-title">{tour.title}</h3>
-                    <p className="top-picks-card-location">
-                      <MapPin size={14} /> {tour.location}
-                    </p>
-                    <p className="top-picks-card-description">
-                      {tour.description}
-                    </p>
-                    <div className="top-picks-card-footer">
-                      <div className="top-picks-card-price">
-                        {tour.discount > 0 && (
-                          <span className="original-price">₹{tour.price}</span>
-                        )}
-                        <span>
-                          ₹
-                          {tour.discount
-                            ? (tour.price * (1 - tour.discount / 100)).toFixed(
-                                0
-                              )
-                            : tour.price}
-                        </span>
-                      </div>
-                      <Link
-                        to={`/book/${tour._id}`}
-                        className="top-picks-card-book-btn"
-                      >
-                        Book Now <ArrowRight size={16} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <button
-            onClick={prevSlide}
-            className="top-picks-arrow left"
-            disabled={isPrevDisabled}
-          >
-            <ArrowLeft />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="top-picks-arrow right"
-            disabled={isNextDisabled}
-          >
-            <ArrowRight />
-          </button>
-        </div>
-        <div className="top-picks-dots">
-          {[...Array(totalPages)].map((_, i) => (
-            <span
-              key={i}
-              className={`top-picks-dot ${
-                Math.floor(currentIndex / cardsPerPage) === i ? "active" : ""
-              }`}
-            ></span>
-          ))}
-        </div>
-      </section>
-      <section className="home-popular-section" ref={sectionRef}>
-        <div className="home-popular-container">
-          <div className="home-popular-header">
-            <p className="home-popular-subtitle">Popular Activities</p>
-            <h2 className="home-popular-title">
-              Adventure. Comfort. Convenience.
+      <section className="top-picks-container">
+        <div className="top-picks-section">
+          <div className="top-picks-header">
+            <p className="top-picks-subtitle">Latest Adventures</p>
+            <h2 className="top-picks-title">
+              Top Upcoming for the Ultimate Adventure
             </h2>
           </div>
-
-          <div className="home-popular-main-content">
-            <div className="home-popular-left">
-              <div className="home-popular-features-grid">
-                {adventureTypes.map((item, index) => (
-                  <div className="home-popular-feature-card" key={index}>
-                    <div className="home-popular-feature-icon">{item.icon}</div>
-                    <span>{item.name}</span>
+          <div className="top-picks-carousel-wrapper">
+            <div className="top-picks-carousel">
+              <div
+                className="top-picks-track"
+                style={{
+                  transform: `translateX(-${
+                    currentIndex *
+                    (100 /
+                      (tours.length > cardsPerPage
+                        ? cardsPerPage
+                        : tours.length))
+                  }%)`,
+                }}
+              >
+                {tours.map((tour) => (
+                  <div className="top-picks-card" key={tour._id}>
+                    <div className="top-picks-card-image-container">
+                      <img
+                        src={tour.image.replace(
+                          "http://localhost:5000",
+                          "https://wonderlandhimalayas.com"
+                        )}
+                        alt={tour.title}
+                        className="top-picks-card-image"
+                      />
+                      <span className="top-picks-card-duration">
+                        {tour.duration}
+                      </span>
+                    </div>
+                    <div className="top-picks-card-content">
+                      <h3 className="top-picks-card-title">{tour.title}</h3>
+                      <p className="top-picks-card-location">
+                        <MapPin size={14} /> {tour.location}
+                      </p>
+                      <p className="top-picks-card-description">
+                        {tour.description}
+                      </p>
+                      <div className="top-picks-card-footer">
+                        <div className="top-picks-card-price">
+                          {tour.discount > 0 && (
+                            <span className="original-price">
+                              ₹{tour.price}
+                            </span>
+                          )}
+                          <span>
+                            ₹
+                            {tour.discount
+                              ? (
+                                  tour.price *
+                                  (1 - tour.discount / 100)
+                                ).toFixed(0)
+                              : tour.price}
+                          </span>
+                        </div>
+                        <Link
+                          to={`/book/${tour._id}`}
+                          className="top-picks-card-book-btn"
+                        >
+                          Book Now <ArrowRight size={16} />
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="home-popular-right">
-              <div className="home-popular-image-stack">
-                <img
-                  src="/home-pics/popular-visa.jpg"
-                  alt="People jumping on a beach"
-                  className="home-popular-image-top"
-                />
-                <img
-                  src="/home-pics/home-popular.jpg"
-                  alt="Woman in pink dress on a boat"
-                  className="home-popular-image-bottom"
-                />
-                <div className="home-popular-destinations-badge">
-                  <h4>1000+ World Popular Destinations</h4>
-                  <div className="home-popular-flags">
-                    <img
-                      src="https://flagcdn.com/w40/gr.png"
-                      alt="Greece Flag"
-                    />
-                    <img
-                      src="https://flagcdn.com/w40/es.png"
-                      alt="Spain Flag"
-                    />
-                    <img
-                      src="https://flagcdn.com/w40/pl.png"
-                      alt="Poland Flag"
-                    />
-                    <img
-                      src="https://flagcdn.com/w40/jp.png"
-                      alt="Japan Flag"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <button
+              onClick={prevSlide}
+              className="top-picks-arrow left"
+              disabled={isPrevDisabled}
+            >
+              <ArrowLeft />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="top-picks-arrow right"
+              disabled={isNextDisabled}
+            >
+              <ArrowRight />
+            </button>
           </div>
-
-          {/* <div className="home-popular-offers-grid">
-            <div className="home-popular-offer-card offer-1">
-              <div className="home-popular-offer-content">
-                <span className="offer-tag">Supper Offer Services</span>
-                <h3>Explore The Travel by Supper Offer</h3>
-                <button>
-                  Explore More <span className="arrow">→</span>
-                </button>
-              </div>
-              <img
-                src="/home-pics/offer-services.png"
-                alt="Woman with luggage"
-              />
-            </div>
-
-            <div className="home-popular-offer-card offer-2">
-              <div className="home-popular-offer-content">
-                <span className="offer-tag">Get 25% Discount</span>
-                <h3>Best Deal For Explore The Modern World</h3>
-                <button>
-                  Get Discount <span className="arrow">→</span>
-                </button>
-              </div>
-              <img
-                src="/home-pics/discount-home.png"
-                alt="Girl with yellow suitcase"
-              />
-            </div>
-          </div> */}
+          <div className="top-picks-dots">
+            {[...Array(totalPages)].map((_, i) => (
+              <span
+                key={i}
+                className={`top-picks-dot ${
+                  Math.floor(currentIndex / cardsPerPage) === i ? "active" : ""
+                }`}
+              ></span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1368,11 +843,20 @@ function Body() {
         <div className="discovery-container">
           {/* Left Column */}
           <div className="discovery-left">
-            <img
+            <h1 className="discovery-left-heading">
+              Explore the <br />
+              <span className="discovery-left-heading1">Extraordinary</span>
+            </h1>
+            <p className="discovery-left-sub">
+              Embark on unforgettable journeys across breathtaking landscapes,
+              from the majestic Himalayas to hidden gems waiting to be
+              discovered.
+            </p>
+            {/* <img
               src="https://images.unsplash.com/photo-1573574891299-b1349fb25dd7?q=80&w=1733&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Travel collage with famous landmarks"
               className="discovery-background-image"
-            />
+            /> */}
             <div ref={statsRef} className="discovery-stats-box">
               <div className="discovery-stat-item">
                 <span className="discovery-stat-number">
@@ -1424,11 +908,11 @@ function Body() {
               explorer.
             </p>
             <div className="discovery-details-wrapper">
-              <img
+              {/* <img
                 src="https://html.pixelfit.agency/tripex/assets/images/home-one/gallery/features-img1.jpg"
                 alt="Father and son looking at a map"
                 className="discovery-adventure-image"
-              />
+              /> */}
               <ul className="discovery-features-list">
                 <li>
                   <CheckmarkIcon /> Seamless Booking Experience
@@ -1439,12 +923,17 @@ function Body() {
                 <li>
                   <CheckmarkIcon /> Save & Security Travels
                 </li>
-                <Link className="discovery-cta-button">
-                  Start Your Tourn{" "}
+                <button className="discovery-cta-button">
+                  <Link
+                    to="/tours"
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    Start yours
+                  </Link>
                   <span className="exclusive-offer-button-icon">
                     <ArrowRightIcon />
                   </span>
-                </Link>
+                </button>
               </ul>
             </div>
           </div>
@@ -1461,7 +950,6 @@ function Body() {
           </div>
 
           <div className="testimonials-content-wrapper">
-            {/* Left Side with Images */}
             <div className="testimonials-left">
               <div className="testimonials-image-collage">
                 <img
@@ -1482,7 +970,6 @@ function Body() {
               </div>
             </div>
 
-            {/* Right Side with Slider */}
             <div className="testimonials-right">
               <div className="testimonials-slider-container">
                 <div
@@ -1495,14 +982,17 @@ function Body() {
                     <div className="testimonials-card" key={testimonial.id}>
                       <div className="testimonials-card-header">
                         <QuoteIcon />
-                        <img
+                        {/* <img
                           src={testimonial.avatar}
                           alt={testimonial.author}
                           className="testimonials-avatar"
-                        />
+                        /> */}
                         <div className="testimonials-author-info">
                           <h4>{testimonial.author}</h4>
-                          <p>{testimonial.title}</p>
+                          <p className="testimonial-email">
+                            {testimonial.email}
+                          </p>
+
                           <div className="testimonials-rating">
                             {[...Array(5)].map((_, i) => (
                               <StarIcon
@@ -1570,21 +1060,6 @@ function Body() {
                 alt="Airplane"
                 className="why-choose-us-plane-img"
               />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="trusted-by-section">
-        <div className="trusted-by-container">
-          <p className="trusted-by-title">Trusted By 200+ Global Brands</p>
-          <div className="trusted-by-slider">
-            <div className="trusted-by-slider-track">
-              {extendedLogos.map((logo, index) => (
-                <div className="trusted-by-slide" key={index}>
-                  <img src={logo.src} alt={logo.alt} />
-                </div>
-              ))}
             </div>
           </div>
         </div>

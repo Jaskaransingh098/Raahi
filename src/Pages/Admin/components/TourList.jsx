@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import api from "../../../api";
 import Banner from "../../../components/Banner/Banner";
 import "../styles/tourList.css";
 
@@ -10,6 +11,8 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
   const [totalTours, setTotalTours] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const searchParams = new URLSearchParams(location.search);
   const activity = searchParams.get("activity");
@@ -27,7 +30,7 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
     const priceRange = params.get("price");
     const type = params.get("type");
 
-    axios
+    api
       .get("/api/tours")
       .then((res) => {
         setTotalTours(res.data.length);
@@ -79,7 +82,6 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
 
             if (!activityMatch) return false;
 
-            // if no duration or price selected → allow
             if (
               (!duration || duration === "All") &&
               (!priceRange || priceRange === "All")
@@ -87,7 +89,6 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
               return true;
             }
 
-            // ✅ allow if either matches
             return durationMatch || priceMatch;
           });
         }
@@ -116,11 +117,16 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
     { value: "durationLong", label: "Duration: Longest" },
   ];
 
+  const indexOfLastTour = currentPage * itemsPerPage;
+  const indexOfFirstTour = indexOfLastTour - itemsPerPage;
+  const currentTours = sortedTours.slice(indexOfFirstTour, indexOfLastTour);
+  const totalPages = Math.ceil(sortedTours.length / itemsPerPage);
+
   return (
     <div className="tour-list-wrapper">
       {!isAdmin && (
         <div>
-          <Banner title="Tours" breadcrumb="Tours" />
+          <Banner title="Treks" breadcrumb="Treks" />
           <div className="tour-list-navbar">
             <span className="tour-list-count">
               <span className="tour-list-count-number">
@@ -189,7 +195,10 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
               <div className="tour-card" key={tour._id}>
                 <div className="tour-card-image-wrapper">
                   <img
-                    src={tour.image}
+                    src={tour.image.replace(
+                      "http://localhost:5000",
+                      "http://ecoexplorers.in"
+                    )}
                     alt={tour.title}
                     className="tour-card-image"
                   />
@@ -252,7 +261,7 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
                   <div className="tour-card-bottom">
                     <div className="tour-card-price-section">
                       <span className="tour-card-price-from">From</span>
-                      <span className="tour-card-price">${tour.price}</span>
+                      <span className="tour-card-price">₹{tour.price}</span>
                     </div>
 
                     {!isAdmin && (
@@ -280,6 +289,19 @@ const TourList = ({ isAdmin = false, onEdit, onDelete, searchInputs }) => {
             <p>No tours found.</p>
           )}
         </div>
+        {totalPages > 1 && (
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={page === currentPage ? "active" : ""}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,31 +1,54 @@
 import React from "react";
 import "./Rules.css";
 import Banner from "../../components/Banner/Banner";
-import {
-  AlertTriangle,
-  HeartPulse,
-  UserX,
-  Bug,
-} from "lucide-react";
+import { AlertTriangle, HeartPulse, UserX, Bug } from "lucide-react";
+import { motion } from "framer-motion";
 
 function Rules() {
+  const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.2 } },
+  };
+
   return (
     <>
       <div className="rules-regulation-page">
         <Banner title="Rules & Regulations" breadcrumb="Rules & Regulations" />
         <div className="rules-regulation-container">
-          <header className="rules-regulation-header">
+          <motion.header
+            className="rules-regulation-header"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
             <span className="rules-regulation-subtitle">Travel Guidelines</span>
             <h1>Rules & Regulations</h1>
             <p>
-              Essential information to ensure your adventure with RAAHi is safe,
+              Essential information to ensure your adventure with Eco Explorers is safe,
               enjoyable, and unforgettable. Please review these guidelines
               carefully before your journey begins.
             </p>
-          </header>
+          </motion.header>
 
-          <main className="rules-regulation-main-grid">
-            <div className="rules-regulation-notes-card">
+          <motion.main
+            className="rules-regulation-main-grid"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <motion.div
+              className="rules-regulation-notes-card"
+              variants={fadeUp}
+              transition={{ duration: 0.8 }}
+            >
               <div className="rules-regulation-notes-header">
                 <div className="rules-regulation-notes-icon">
                   <AlertTriangle size={24} />
@@ -52,7 +75,7 @@ function Rules() {
                   from actual services.
                 </li>
                 <li>
-                  Team RAAHi reserves the right to correct any printing or
+                  Team Eco Explorers reserves the right to correct any printing or
                   pricing errors.
                 </li>
                 <li>
@@ -73,17 +96,27 @@ function Rules() {
                   charges, which will be informed in advance.
                 </li>
               </ul>
-            </div>
-            <aside className="rules-regulation-sidebar">
+            </motion.div>
+            <motion.aside
+              className="rules-regulation-sidebar"
+              variants={fadeUp}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <img
                 src="/trek-images/rules.svg"
                 alt="Travel essentials like a backpack, map, and camera"
                 className="rules-regulation-sidebar-image"
               />
-            </aside>
-          </main>
+            </motion.aside>
+          </motion.main>
 
-          <footer className="rules-regulation-lower-grid">
+          <motion.footer
+            className="rules-regulation-lower-grid"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="rules-regulation-policy-card">
               <div className="rules-regulation-policy-header">
                 <div className="rules-regulation-policy-icon covid">
@@ -153,7 +186,7 @@ function Rules() {
                 negligence or breach.
               </p>
             </div>
-          </footer>
+          </motion.footer>
         </div>
       </div>
     </>

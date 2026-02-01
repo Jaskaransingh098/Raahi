@@ -1,3 +1,8 @@
+.why-us-page {
+    background: #E7F0FF;
+}
+
+
 .why-us-hero {
     position: relative;
     height: 60vh;
@@ -81,7 +86,7 @@
 /* --- Philosophy Section --- */
 .why-us-philosophy-section {
     padding: 80px 20px;
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
 }
 
 .why-us-philosophy-container {
@@ -98,8 +103,10 @@
 }
 
 .why-us-philosophy-container .why-us-subtitle {
-    color: #f97316;
+    color: #5475c7;
     font-weight: 600;
+    font-size: large;
+    padding-bottom: 10px;
 }
 
 .why-us-philosophy-grid {
@@ -120,7 +127,7 @@
     width: 60px;
     height: 60px;
     background-color: #f0fdf4;
-    color: #22c55e;
+    color: #5475c7;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -144,6 +151,9 @@
 .why-us-guides-section {
     padding: 80px 20px;
     background-color: #1f2937;
+    border-radius: 140px;
+    width: 90%;
+    margin: auto;
     color: white;
 }
 
@@ -154,8 +164,9 @@
 }
 
 .why-us-guides-container .why-us-subtitle {
-    color: #f97316;
+    color: #c8d8ff;
     font-weight: 600;
+    font-size: 2rem;
 }
 
 .why-us-guides-container h2 {
@@ -186,7 +197,7 @@
 }
 
 .why-us-guide-icon {
-    color: #22c55e;
+    color: #5475c7;
     margin-bottom: 15px;
 }
 
@@ -203,9 +214,17 @@
 
 
 /* Responsive */
+/* --- Base styles are fine --- */
+
+/* ✅ Tablets and below */
 @media (max-width: 992px) {
     .why-us-intro-section {
         flex-direction: column;
+        text-align: center;
+    }
+
+    .why-us-intro-text {
+        margin-top: 20px;
     }
 
     .why-us-philosophy-grid {
@@ -217,12 +236,73 @@
     }
 }
 
+/* ✅ Mobiles */
 @media (max-width: 768px) {
+    .why-us-hero {
+        height: 50vh;
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
     .why-us-hero h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
+    }
+
+    .why-us-hero p {
+        font-size: 1rem;
+    }
+
+    .why-us-intro-text h2,
+    .why-us-philosophy-container h2,
+    .why-us-guides-container h2 {
+        font-size: 1.8rem;
     }
 
     .why-us-philosophy-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .why-us-philosophy-card {
+        padding: 20px;
+    }
+}
+
+/* ✅ Very Small Phones */
+@media (max-width: 480px) {
+    .why-us-hero {
+        height: auto;
+        padding: 60px 15px;
+    }
+
+    .why-us-hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .why-us-hero p {
+        font-size: 0.9rem;
+    }
+
+    .why-us-intro-section {
+        gap: 30px;
+        padding: 40px 15px;
+    }
+
+    .why-us-intro-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .why-us-intro-text p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .why-us-philosophy-container h2,
+    .why-us-guides-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .why-us-guides-container>p {
+        font-size: 0.95rem;
     }
 }

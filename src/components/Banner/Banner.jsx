@@ -1,17 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Banner.css"; // Optional for styles
+import "./Banner.css";
 
 const Banner = ({ title, breadcrumb }) => {
   return (
+    //
     <div className="banner-container">
       <div className="banner-image">
-        <div className="banner-overlay">
-          <img src="/common-banner/text-bg.png" alt="brush" className="brush-img" />
-          <div className="banner-text">
-            <h1>{title}</h1>
-            <p><Link to="/" className="banner-link">Home</Link> &gt; {breadcrumb}</p>
+        <div className="banner-content">
+          {/* Breadcrumb */}
+          <div className="breadcrumb">
+            <Link to="/" className="breadcrumb-link">
+              Home
+            </Link>
+            <span className="breadcrumb-separator">›</span>
+            <span className="breadcrumb-active">{breadcrumb}</span>
           </div>
+
+          {/* Title */}
+          <h1 className="banner-title">{title}</h1>
+          <div className="title-underline"></div>
+
+          {/* Subtitle */}
+        
         </div>
       </div>
     </div>

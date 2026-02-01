@@ -1,7 +1,7 @@
 .customize-section {
     width: 100%;
     padding: 80px 20px;
-    background-color: #ffffff;
+    background-color: #E7F0FF;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .customize-subtitle {
-    color: #f97316;
+    color: #3b82f6;
     font-weight: 600;
     font-size: 1.5rem;
     margin-bottom: 30px;
@@ -89,7 +89,7 @@
 }
 
 .customize-button {
-    background-color: #22c55e;
+    background-color: #b8a0cb;
     color: white;
     border: none;
     padding: 14px 30px;
@@ -111,7 +111,7 @@
 
 .customize-button-icon {
     background-color: white;
-    color: #22c55e;
+    color: #393636;
     width: 28px;
     height: 28px;
     border-radius: 50%;

@@ -75,10 +75,10 @@ function Privacy() {
             <p className="privacy-policy-subtitle">Your Trust, Our Priority</p>
             <h1>Privacy Policy</h1>
             <p>
-              At Team-Raahi Outdoors and Holidays, we value your privacy and are
-              committed to protecting the personal information you share with
-              us. This Privacy Policy outlines the types of data we collect, how
-              we use it, and the measures we take to protect it.
+              At Team-Eco Explorers Outdoors and Holidays, we value your
+              privacy and are committed to protecting the personal information
+              you share with us. This Privacy Policy outlines the types of data
+              we collect, how we use it, and the measures we take to protect it.
             </p>
           </header>
           <main className="privacy-policy-list">
@@ -101,9 +101,9 @@ function Privacy() {
                   If you have any questions about this Privacy Policy, please
                   contact us:
                   <br />
-                  <strong>Email:</strong> contact@raahioutdoors.com
+                  <strong>Email:</strong> Eco Explorers@gmail.com
                   <br />
-                  <strong>Phone:</strong> 9699872996
+                  <strong>Phone:</strong>+91 9370704070
                 </p>
               </div>
             </div>

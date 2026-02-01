@@ -10,6 +10,7 @@ import {
   Instagram,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./Footer.css";
 
 const ArrowRightIcon = () => (
@@ -35,6 +36,18 @@ function Footer() {
     e.preventDefault();
   };
 
+  const fadePopVariant = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const fadePopTransition = {
+    type: "spring",
+    stiffness: 100,
+    damping: 20,
+    duration: 0.6,
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -56,7 +69,14 @@ function Footer() {
 
   return (
     <>
-      <section className="exclusive-offer-section">
+      <motion.section
+        className="exclusive-offer-section"
+        variants={fadePopVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={fadePopTransition}
+      >
         <div className="exclusive-offer-container">
           {/* Left Column: Text Content */}
           <div className="exclusive-offer-left">
@@ -70,7 +90,9 @@ function Footer() {
               getaway for you.
             </p>
             <button className="exclusive-offer-button">
-              <Link to="/contact" className="exclusive-offer-button2">Book Now</Link>
+              <Link to="/contact" className="exclusive-offer-button2">
+                Book Now
+              </Link>
               <span className="exclusive-offer-button-icon">
                 <ArrowRightIcon />
               </span>
@@ -89,7 +111,7 @@ function Footer() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <footer
         className="footer"
@@ -100,13 +122,13 @@ function Footer() {
           <article className="footer__brand" aria-label="About Tripex">
             <div className="brand__logo" aria-hidden="true">
               <div className="brand__logo-mark">
-                <BaggageClaim className="brand__icon brand__icon--bag" />
-                <Plane className="brand__icon brand__icon--plane" />
+                <img src="/logo/logo-1.png" alt="" />
               </div>
-              <span className="brand__name">Raahi</span>
+              <span className="brand__name">Eco Explorers</span>
             </div>
             <p className="brand__tagline">
-              We take care of every detail you can travel with confidence ease.
+              We take care of every detail so you can enjoy your adventure with
+              confidence and ease.
             </p>
             <div className="brand__help">
               <Headphones aria-hidden="true" className="help__icon" />
@@ -114,10 +136,10 @@ function Footer() {
             </div>
             <a
               className="brand__phone"
-              href="tel:123458698888"
+              href="tel:+919370704070"
               aria-label="Call Tripex support"
             >
-              1(234)-5869-8888
+              +91 93707 04070
             </a>
           </article>
 
@@ -163,75 +185,7 @@ function Footer() {
               </ul>
             </div>
 
-            {/* <div className="footer__col">
-              <h3 className="footer__heading">Popular Services</h3>
-              <ul className="footer__list">
-                <li>
-                  <a href="#" className="footer__link">
-                    Flight Bookings
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer__link">
-                    Hotel Reservations
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer__link">
-                    Holiday Packages
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer__link">
-                    Travel Insurance
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer__link">
-                    Tour Guide Services
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer__link">
-                    Visa Assistance
-                  </a>
-                </li>
-                <li>
-                  <a href="/admin-login" className="footer__link">
-                    Admin Login
-                  </a>
-                </li>
-              </ul>
-            </div> */}
-
-            {/* <div className="footer__col footer__newsletter">
-              <h3 className="footer__heading">Newsletter</h3>
-              <p className="newsletter__hint">Get every travel news update</p>
-              <form
-                className="newsletter__form"
-                onSubmit={onSubmit}
-                aria-label="Subscribe to newsletter"
-              >
-                <label htmlFor="newsletter-email" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="newsletter-email"
-                  type="email"
-                  required
-                  placeholder="Email address"
-                  className="newsletter__input"
-                />
-                <button type="submit" className="newsletter__button">
-                  <span>Subscribe</span>
-                  <span className="newsletter__button-icon" aria-hidden="true">
-                    <ArrowRight />
-                  </span>
-                </button>
-              </form>
-            </div> */}
-
-            <div className="footer__col footer__social">
+            {/* <div className="footer__col footer__social">
               <h3 className="footer__heading">Follow Us</h3>
               <div
                 className="social__icons"
@@ -251,33 +205,19 @@ function Footer() {
                   <Instagram />
                 </a>
               </div>
-            </div>
+            </div> */}
           </nav>
         </div>
 
         <div className="footer__hero" aria-hidden="true">
           <div className={`hero__text ${animate ? "animate-pop" : ""}`}>
-            Adventure
+            Eco
+            <br />
+            Explorers
           </div>
         </div>
 
         <div className="footer__bottom">
-          <div className="svg-shape-wrapper footer-shaper">
-            <svg className="wave" viewBox="0 0 2 1" preserveAspectRatio="none">
-              <defs>
-                <path
-                  id="w"
-                  d="M0 1V0.5 Q0.5 1 1 0.5 T2 0.5 3 0.5 4 0.5 V1 Z"
-                ></path>
-              </defs>
-              <g>
-                <use href="#w" fill="rgba(242, 151, 39, 0.08)"></use>
-              </g>
-            </svg>
-            <svg className="wave" viewBox="0 0 2 1" preserveAspectRatio="none">
-              <use href="#w" fill="rgba(242, 151, 39, 0.08)"></use>
-            </svg>
-          </div>
           <p className="footer__copy">
             <span className="copy__brand">©2025 Apex InfoTech Solutions</span>,
             All Rights Reserved, Design by{" "}

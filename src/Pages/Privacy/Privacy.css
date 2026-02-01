@@ -1,6 +1,7 @@
 .privacy-policy-container {
-    max-width: 1300px;
-    margin: 120px auto;
+    /* max-width: 1300px; */
+    padding: 120px;
+    background-color: #E7F0FF;
 }
 
 /* --- Header --- */
@@ -10,8 +11,8 @@
 }
 
 .privacy-policy-header .privacy-policy-subtitle {
-    color: #f97316;
-    background: #1e293b;
+    color: #fff;
+    background: #0b2056;
     border-radius: 30px;
     max-width: 250px;
     padding: 8px;
@@ -42,7 +43,7 @@
 }
 
 .privacy-policy-item {
-    background-color: #ffffff;
+    background-color: #e4ebf4;
     border: 1px solid #e5e7eb;
     border-radius: 16px;
     padding: 25px;
@@ -62,7 +63,7 @@
     left: 0;
     width: 5px;
     height: 100%;
-    background-color: #22c55e;
+    background-color: #5475c7;
     transform: scaleY(0);
     transform-origin: bottom;
     transition: transform 0.4s ease;
@@ -87,12 +88,12 @@
     align-items: center;
     justify-content: center;
     background-color: #f0fdf4;
-    color: #22c55e;
+    color: #5475c7;
     transition: all 0.3s ease;
 }
 
 .privacy-policy-item:hover .privacy-policy-item-icon {
-    background-color: #22c55e;
+    background-color: #0b2056;
     color: #ffffff;
     transform: rotate(-15deg);
 }

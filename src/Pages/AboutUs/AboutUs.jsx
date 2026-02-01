@@ -10,6 +10,7 @@ import {
   Linkedin,
   Instagram,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./AboutUs.css";
 
 const TentIcon = () => (
@@ -142,6 +143,23 @@ function AboutUs() {
     },
   ];
 
+  const handleMouseMove = (e, card) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left; // mouse X inside card
+    const y = e.clientY - rect.top; // mouse Y inside card
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * 10; // max 10deg tilt
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  };
+
+  const handleMouseLeave = (card) => {
+    card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+  };
+
   const logos = [
     {
       id: 1,
@@ -191,13 +209,14 @@ function AboutUs() {
           <div className="about-page-left-col">
             <p className="about-page-subtitle">Known About Us</p>
             <h2 className="about-page-title">
-              Passion for Adventure, Purpose in Travel
+              Passion for Trekking, Purpose in Exploration
             </h2>
             <p className="about-page-description">
-              A travel agency is your gateway to unforgettable adventures and
-              stress free vacations knowledge access. From booking flights and
-              the to arranging guided tours travel insurance detail carefully
-              handled.
+              A trekking and adventure company is your gateway to thrilling
+              journeys and unforgettable outdoor experiences. From planning
+              mountain trails and expeditions to arranging guided treks, safety
+              gear, and travel insurance — every detail is carefully handled so
+              you can explore with confidence and peace of mind.
             </p>
             <div className="about-page-features">
               <div className="about-page-feature-item">
@@ -205,10 +224,11 @@ function AboutUs() {
                   <HeartHandshake size={28} />
                 </div>
                 <div>
-                  <h4>Friendly Guide</h4>
+                  <h4>Expert Trail Leaders</h4>
                   <p>
-                    At the heart of every great journey is a great best in the
-                    world.
+                    At the heart of every unforgettable trek is a leader who
+                    knows the paths, shares local wisdom, and makes every step
+                    memorable.
                   </p>
                 </div>
               </div>
@@ -217,21 +237,21 @@ function AboutUs() {
                   <ShieldCheck size={28} />
                 </div>
                 <div>
-                  <h4>Safety Travel</h4>
+                  <h4>Adventure with Safety</h4>
                   <p>
-                    We go above and beyond ensure that your journey not
-                    exciting.
+                    We go above and beyond to ensure your journey is thrilling
+                    yet secure, so you can explore with complete peace of mind.
                   </p>
                 </div>
               </div>
             </div>
             <div className="about-page-footer">
-              <button className="about-page-cta-button">
+              {/* <button className="about-page-cta-button">
                 Learn More Us
                 <span className="about-page-arrow-circle">
                   <ArrowRight size={16} />
                 </span>
-              </button>
+              </button> */}
               <div className="about-page-clients">
                 <div className="about-page-client-avatars">
                   <img src="https://i.pravatar.cc/40?img=1" alt="Client 1" />
@@ -239,7 +259,7 @@ function AboutUs() {
                   <img src="https://i.pravatar.cc/40?img=3" alt="Client 3" />
                   <img src="https://i.pravatar.cc/40?img=4" alt="Client 4" />
                 </div>
-                <p>10m+ Trusted Clients</p>
+                <p>3k Trusted Clients</p>
               </div>
             </div>
           </div>
@@ -248,7 +268,7 @@ function AboutUs() {
           <div className="about-page-right-col">
             <div className="about-page-image-collage">
               <img
-                src="https://html.pixelfit.agency/tripex/assets/images/innerpage/about/about-img1.jpg"
+                src="/admin/aboutus2.png"
                 alt="Collage of world landmarks with a suitcase"
                 className="about-page-main-image"
               />
@@ -269,108 +289,6 @@ function AboutUs() {
         </div>
       </section>
 
-      <section className="home-popular-section">
-        <div className="home-popular-container">
-          <div className="home-popular-header">
-            <p className="home-popular-subtitle">Popular Activities</p>
-            <h2 className="home-popular-title">
-              Adventure. Comfort. Convenience.
-            </h2>
-          </div>
-
-          <div className="home-popular-main-content">
-            <div className="home-popular-left">
-              <div className="home-popular-features-grid">
-                {adventureTypes.map((item, index) => (
-                  <div className="home-popular-feature-card" key={index}>
-                    <div className="home-popular-feature-icon">{item.icon}</div>
-                    <span>{item.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="home-popular-right">
-              <div className="home-popular-image-stack">
-                <img
-                  src="/home-pics/popular-visa.jpg"
-                  alt="People jumping on a beach"
-                  className="home-popular-image-top"
-                />
-                <img
-                  src="/home-pics/home-popular.jpg"
-                  alt="Woman in pink dress on a boat"
-                  className="home-popular-image-bottom"
-                />
-                <div className="home-popular-destinations-badge">
-                  <h4>1000+ World Popular Destinations</h4>
-                  <div className="home-popular-flags">
-                    <img
-                      src="https://flagcdn.com/w40/gr.png"
-                      alt="Greece Flag"
-                    />
-                    <img
-                      src="https://flagcdn.com/w40/es.png"
-                      alt="Spain Flag"
-                    />
-                    <img
-                      src="https://flagcdn.com/w40/pl.png"
-                      alt="Poland Flag"
-                    />
-                    <img
-                      src="https://flagcdn.com/w40/jp.png"
-                      alt="Japan Flag"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="travel-guide-section">
-        <div className="travel-guide-container">
-          <div className="travel-guide-header">
-            <div>
-              <p className="travel-guide-subtitle">Meet Our Tour Guide</p>
-              <h2 className="travel-guide-title">Experience Travel Guide</h2>
-            </div>
-          </div>
-          <div className="travel-guide-grid">
-            {guides.map((guide) => (
-              <div className="travel-guide-card" key={guide.id}>
-                <div className="travel-guide-image-wrapper">
-                  <img src={guide.image} alt={guide.name} />
-                </div>
-                <div className="travel-guide-info">
-                  <h3>{guide.name}</h3>
-                  <p>{guide.title}</p>
-                  <div className="travel-guide-social-wrapper">
-                    <div className="travel-guide-plus-icon">
-                      <Plus size={20} />
-                    </div>
-                    <div className="travel-guide-social-icons">
-                      <a href={guide.social.facebook} aria-label="Facebook">
-                        <Facebook size={16} />
-                      </a>
-                      <a href={guide.social.twitter} aria-label="Twitter">
-                        <Twitter size={16} />
-                      </a>
-                      <a href={guide.social.linkedin} aria-label="LinkedIn">
-                        <Linkedin size={16} />
-                      </a>
-                      <a href={guide.social.instagram} aria-label="Instagram">
-                        <Instagram size={16} />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="aboutus-passion-section">
         <div className="aboutus-passion-container">
           {/* Left Column */}
@@ -378,7 +296,7 @@ function AboutUs() {
             <div className="aboutus-passion-image-wrapper">
               <div className="aboutus-passion-bg-shape"></div>
               <img
-                src="https://html.pixelfit.agency/tripex/assets/images/innerpage/features/feature-img1.png"
+                src="/admin/about us4.jpg"
                 alt="Traveler reading a book next to a suitcase"
                 className="aboutus-passion-main-image"
               />
@@ -386,18 +304,30 @@ function AboutUs() {
           </div>
           {/* Right Column */}
           <div className="aboutus-passion-right-col">
-            <p className="aboutus-passion-subtitle">Discover World Tours</p>
+            <p className="aboutus-passion-subtitle">
+              Discover Treks with Eco Explorers
+            </p>
             <h2 className="aboutus-passion-title">
-              Passion for Adventure Purpose in Travel
+              Passion for Adventure, Purpose in Every Journey
             </h2>
             <p className="aboutus-passion-description">
-              We don't just plan trips—we craft unforgettable experiences for
-              the bold and curious. Whether you're chasing mountain peaks,
-              diving into crystal-clear waters or exploring remote cultures, our
-              expert team is here to guide
+              At Eco Explorers, we don’t just organize treks—we create
+              unforgettable trails for explorers at heart. Whether it’s
+              conquering rugged mountain paths, camping under starry skies, or
+              discovering hidden cultures in remote valleys, our team ensures
+              every step of your journey is meaningful and memorable.
             </p>
             <button className="aboutus-passion-cta-button">
-              Start Booking
+              <Link
+                to="/tours"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  cursor: "hover",
+                }}
+              >
+                Book Now
+              </Link>
               <span className="aboutus-passion-arrow-circle">
                 <ArrowRight size={16} />
               </span>
@@ -406,7 +336,7 @@ function AboutUs() {
         </div>
       </section>
 
-      <section className="trusted-by-section">
+      {/* <section className="trusted-by-section">
         <div className="trusted-by-container">
           <p className="trusted-by-title">Trusted By 200+ Global Brands</p>
           <div className="trusted-by-slider">
@@ -419,7 +349,7 @@ function AboutUs() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

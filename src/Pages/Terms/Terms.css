@@ -1,19 +1,27 @@
+.terms-condition-main-section{
+    width: 100%;
+    background-color: #E7F0FF;
+}
+
 .terms-conditions-container {
     max-width: 1200px;
-    margin: 100px auto;
+    margin: auto;
+    padding-top: 120px;
     display: flex;
+    background: #E7F0FF;
     gap: 50px;
 }
 .terms-conditions-header{
     text-align: center;
-    margin-top: 110px;
+    padding-top: 110px;
+    background: #E7F0FF;
 }
 .terms-conditions-header h1{
     font-family: Arial, Helvetica, sans-serif;
 }
 .terms-conditions-header h3{
     color: rgb(88, 86, 86);
-    margin-bottom: 30px;
+    padding-bottom: 30px;
 }
 .terms-conditions-header p{
     border: 1px solid rgb(218, 213, 213);
@@ -28,7 +36,7 @@
     margin: auto;
 }
 .terms-header-p{
-    color: #22c55e;
+    color: #5475c7;
     font-weight: 600;
 }
 
@@ -73,7 +81,7 @@
 }
 
 .terms-conditions-sidebar li a.active {
-    background-color: #22c55e;
+    background-color: #5475c7;
     color: white;
     font-weight: 600;
 }
@@ -108,7 +116,7 @@
 }
 
 .terms-conditions-section .terms-conditions-icon {
-    color: #f97316;
+    color: #5475c7;
 }
 
 .terms-conditions-section p,

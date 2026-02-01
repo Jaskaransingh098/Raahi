@@ -1,6 +1,6 @@
 .booknow-page {
     font-family: 'Poppins', sans-serif;
-    /* background-color: #f8f9fa; */
+    background-color: #E7F0FF;
     padding: 40px 20px;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .booknow-rating .star-icon {
-    color: #f59e0b;
+    color: #0b2056;
 }
 
 .booknow-description h2,
@@ -76,7 +76,7 @@
 .booknow-contact-form-card h2 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1e293b;
+    color: #2563eb;
     margin-bottom: 20px;
 }
 
@@ -85,58 +85,315 @@
     line-height: 1.8;
 }
 
-.booknow-benefits-list {
-    list-style: none;
-    padding: 0;
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
-}
-
-.booknow-benefits-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 30px;
-    color: #475569;
-    break-inside: avoid-column;
-}
 
 .booknow-check-icon {
-    color: #22c55e;
+    color: #5475c7;
 }
 
-.booknow-trip-info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
+.trip-info-header {
+    text-align: center;
+    margin-bottom: 25px;
 }
+
+.trip-info-header h3 {
+    font-size: 1.6rem;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.trip-info-header p {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+
 
 .booknow-trip-info-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 15px;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
-.booknow-trip-info-icon {
-    width: 50px;
-    height: 50px;
-    background-color: #f0fdf4;
-    color: #22c55e;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 10px auto;
+.booknow-trip-info-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
+
+
+
+
 
 .booknow-trip-info-item strong {
     display: block;
     color: #1e293b;
     font-weight: 600;
+    margin-bottom: 4px;
 }
 
 .booknow-trip-info-item span {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #6b7280;
+}
+
+/* ============ Tour Benefit Highlights Section ============ */
+.booknow-benefits {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.8rem;
+    margin-top: 2rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    transition: box-shadow 0.3s ease;
+}
+
+.booknow-benefits:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.booknow-benefits h2 {
+    font-size: 1.5rem;
+    color: #2563eb;
+    /* dark green */
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid #2563eb;
+    /* green-600 */
+    padding-left: 10px;
+    letter-spacing: 0.4px;
+}
+
+/* ============ List Styling ============ */
+.booknow-benefits-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+/* ============ List Item ============ */
+.booknow-benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f9fafb;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    color: #1f2937;
+    /* gray-800 */
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: all 0.25s ease;
+    border-left: 3px solid transparent;
+}
+
+.booknow-benefits-list li:hover {
+    background: #f0fdf4;
+    /* green-50 */
+    border-left: 3px solid #0b2056;
+    transform: translateX(5px);
+}
+
+/* ============ Check Icon ============ */
+.booknow-check-icon {
+    color: #2563eb;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 768px) {
+    .booknow-benefits {
+        padding: 1.3rem;
+    }
+
+    .booknow-benefits h2 {
+        font-size: 1.3rem;
+    }
+
+    .booknow-benefits-list li {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.9rem;
+    }
+}
+
+
+.booknow-showmore-btn {
+    display: block;
+    margin: 25px auto 0;
+    background: #5475c7;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.booknow-showmore-btn:hover {
+    background: #0b2056;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .booknow-trip-info-grid {
+        gap: 20px;
+    }
+
+    .trip-info-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .trip-info-header p {
+        font-size: 0.9rem;
+    }
+}
+
+
+.tour-cost-section {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.tour-cost-title {
+    color: #0d0d0d;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+}
+
+/* Scrollable wrapper for table */
+.tour-cost-table-wrapper {
+    width: 100%;
+    overflow-y: auto;
+    /* vertical scroll */
+    overflow-x: hidden;
+    /* prevent horizontal scroll */
+    max-height: 70vh;
+    /* limit height */
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Custom scrollbar (optional aesthetic) */
+.tour-cost-table-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tour-cost-table-wrapper::-webkit-scrollbar-thumb {
+    background: #d1fae5;
+    /* light green */
+    border-radius: 10px;
+}
+
+.tour-cost-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #86efac;
+    /* green-300 */
+}
+
+.tour-cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+    font-size: 1.3rem;
+}
+
+/* Header */
+.tour-cost-table thead {
+    background-color: #f0fdf4;
+    /* green-50 */
+    position: sticky;
+    /* keep header visible while scrolling */
+    top: 0;
+    z-index: 2;
+}
+
+.tour-cost-table th {
+    padding: 15px 15px;
+    font-weight: 500;
+    color: #2563eb;
+    font-size: 1.4rem;
+    /* dark green */
+    border-bottom: 1px solid #d1fae5;
+    white-space: nowrap;
+}
+
+/* Rows */
+.tour-cost-table td {
+    padding: 18px 16px;
+    color: #1f2937;
+    font-weight: 500;
+    font-size: 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Row hover effect */
+.tour-cost-table tr:hover {
+    background-color: #f9fafb;
+    transition: background-color 0.2s ease;
+}
+
+
+
+@media (max-width: 1024px) {
+    .tour-cost-table-wrapper {
+        max-height: 65vh;
+    }
+
+    .tour-cost-table {
+        font-size: 0.6rem;
+    }
+
+    .tour-cost-table th,
+    .tour-cost-table td {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tour-cost-table-wrapper {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 60vh;
+    }
+
+    .tour-cost-table {
+        width: 100%;
+        table-layout: fixed;
+
+        font-size: 0.5rem;
+    }
+
+    .tour-cost-table th,
+    .tour-cost-table td {
+        padding: 8px 10px;
+        white-space: normal;
+        font-size: 0.8rem;
+        /* wrap text if needed */
+        word-wrap: break-word;
+    }
+}
+
+
+/* Subtle alternate row color */
+.tour-cost-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Rounded corners on the table container */
+.tour-cost-section .tour-cost-table-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .booknow-included-excluded {
@@ -147,7 +404,7 @@
 
 .booknow-included-excluded h3 {
     font-size: 1.3rem;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
 }
 
 .booknow-included-excluded ul {
@@ -165,6 +422,38 @@
 
 .booknow-included-excluded .excluded .x-icon {
     color: #ef4444;
+}
+
+.included-heading,
+.excluded-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    /* reduce from 35px for better balance */
+}
+
+.heading-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    /* slight visual alignment tweak */
+}
+
+.included-icon {
+    color: #16a34a;
+    /* green */
+}
+
+.excluded-icon {
+    color: #f59e0b;
+    /* amber/yellow */
+}
+
+.booknow-included-excluded h3 {
+    font-size: 1.6rem;
+    margin: 0px 20px 0px 10px;
+    font-weight: 500;
+    color: #1e293b;
 }
 
 /* --- Right Column (Sidebar) --- */
@@ -188,12 +477,12 @@
 }
 
 .booknow-share-icons a {
-    color: #6b7280;
+    color: #5475c7;
     transition: color 0.3s ease;
 }
 
 .booknow-share-icons a:hover {
-    color: #1e293b;
+    color: #0b2056;
 }
 
 .booknow-pricing-card h3 {
@@ -219,6 +508,104 @@
     color: #9ca3af;
     margin-right: 8px;
 }
+
+.booknow-batch-section {
+    margin-bottom: 20px;
+}
+
+.booknow-batch-section h4 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.booknow-batch-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.booknow-batch-btn {
+    padding: 6px 14px;
+    border: 1px solid #5475c7;
+    border-radius: 8px;
+    background: white;
+    color: #5475c7;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.booknow-batch-btn:hover {
+    background: #5475c7;
+    color: white;
+}
+
+.booknow-batch-btn.active {
+    background: #0b2056;
+    color: white;
+}
+
+.booknow-batch-details p {
+    font-size: 0.95rem;
+    color: #475569;
+    margin: 3px 0;
+}
+
+.booknow-batch-details {
+    margin-top: 15px;
+}
+
+.batch-date-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 15px 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.batch-date-card:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.batch-date-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.batch-date-item i {
+    color: #5475c7;
+    font-size: 1.2rem;
+}
+
+.batch-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.batch-date {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+@media (min-width: 600px) {
+    .batch-date-card {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
 
 /* --- Contact Form --- */
 .booknow-contact-form {
@@ -259,7 +646,7 @@
 }
 
 .booknow-contact-form button {
-    background-color: #22c55e;
+    background-color: #0b2056;
     color: white;
     border: none;
     padding: 15px;
@@ -275,8 +662,159 @@
 }
 
 .booknow-contact-form button:hover {
-    background-color: #16a34a;
+    background-color: #5475c7;
 }
+
+.booknow-faqs-container {
+    width: 100%;
+    background: #f9fafb;
+    padding: 30px 20px;
+    border-radius: 16px;
+    margin-top: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Tabs */
+.faq-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.faq-tab {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #e5e7eb;
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.faq-tab.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+.faq-tab:hover {
+    background: #d1d5db;
+}
+
+.faq-icon {
+    margin-right: 0px;
+    color: #fff;
+    /* padding: 10px; */
+    background-color: #0b2056;
+    /* blue for all icons or customize per type if needed */
+    flex-shrink: 0;
+}
+
+/* FAQ Items */
+.faq-item {
+    background: #fff;
+    border-radius: 10px;
+    /* margin-bottom: 10px; */
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    /* vertically center the icon + text */
+    justify-content: space-between;
+    /* chevron at right */
+    padding: 18px 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #111827;
+    text-align: left;
+    transition: background 0.3s;
+}
+
+.faq-question .faq-icon {
+    margin-right: 12px;
+    /* padding between icon and text */
+    flex-shrink: 0;
+    /* prevent icon from shrinking */
+    color: #fff;
+    border-radius: 20px;
+    padding: 8px;
+    height: 40px;
+    width: 40px;
+    /* color per type */
+}
+
+.faq-question span {
+    flex: 1;
+    /* text takes remaining space */
+    text-align: left;
+}
+
+.faq-question:hover {
+    background: #f3f4f6;
+}
+
+.chevron {
+    transition: transform 0.3s ease;
+    stroke: #4b5563;
+}
+
+.chevron.rotate {
+    transform: rotate(180deg);
+}
+
+/* Answer animation */
+.faq-answer {
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    background: #f9fafb;
+}
+
+.faq-answer p {
+    padding: 12px 20px 16px;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .booknow-faqs-container {
+        padding: 20px 10px;
+    }
+
+    .faq-question {
+        font-size: 0.95rem;
+        padding: 14px 16px;
+    }
+
+    .faq-answer p {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+    }
+
+    .faq-tab {
+        flex: 1 1 45%;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-tab {
+        flex: 1 1 100%;
+    }
+}
+
 
 @media (max-width: 768px) {
     .booknow-header {
@@ -285,8 +823,21 @@
     }
 
     .booknow-main-content {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
+        display: flex;
+        flex-direction: column;
         /* stack left + right */
+    }
+
+    .booknow-right-col {
+        order: -1;
+        position: static;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .booknow-left-col {
+        order: 1;
     }
 
     .booknow-included-excluded {
@@ -331,5 +882,128 @@
     .booknow-benefits h2,
     .booknow-contact-form-card h2 {
         font-size: 1.2rem;
+    }
+}
+
+
+/* === Short Trip Information Section (Aligned Left) === */
+.booknow-card .booknow-trip-info {
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 24px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.booknow-card.booknow-trip-info:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Header */
+.trip-info-header h3 {
+    font-size: 1.3rem;
+    color: #0077ff;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: left;
+    /* ensure header text starts from left */
+    padding-left: 4px;
+}
+
+/* Grid layout */
+.booknow-trip-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+/* Info items aligned from start */
+.booknow-trip-info-item {
+    display: flex;
+    align-items: center;
+    /* vertically center icon + text */
+    justify-content: flex-start;
+    /* make sure they start from left */
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-align: left;
+}
+
+.booknow-trip-info-item:hover {
+    background: #eef4ff;
+    transform: translateY(-2px);
+}
+
+/* Icon now aligned left */
+.booknow-trip-info-icon {
+    margin-right: 12px;
+    color: #0077ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Text content aligned left */
+.booknow-trip-info-content {
+    text-align: left;
+}
+
+.booknow-trip-info-content strong {
+    display: block;
+    color: #222;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.booknow-trip-info-content span {
+    font-size: 0.88rem;
+    color: #555;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Button */
+.trip-info-toggle {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.trip-info-btn {
+    background: #0077ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.trip-info-btn:hover {
+    background: #005ed6;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+    .booknow-card.booknow-trip-info {
+        padding: 18px;
+    }
+
+    .booknow-trip-info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .trip-info-header h3 {
+        font-size: 1.15rem;
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
-import "./App.css"
+import "./App.css";
 import Loader from "./components/Loader/Loader";
 import Navbar from "./components/Navbar/Navbar";
 import Body from "./components/Body/Body";
@@ -21,14 +21,14 @@ import Cancellation from "./Pages/Cancellation/Cancellation";
 import Terms from "./Pages/Terms/Terms";
 import Privacy from "./Pages/Privacy/Privacy";
 import BookNow from "./Pages/BookNow/BookNow";
+import ManageTourPage from "./Pages/Admin/components/Manage";
 
 function App() {
   return (
-    <Loader>
-      <Router>
-        <ScrollToTop />
-        <Navbar />
-
+    <Router>
+      <ScrollToTop />
+      <Navbar />
+      <Loader>
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/contact" element={<Contact />} />
@@ -46,13 +46,12 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/book/:id" element={<BookNow />} />
-          
-
+          <Route path="/admin/tour/:id?" element={<ManageTourPage/>}/>
         </Routes>
+      </Loader>
 
-        <Footer />
-      </Router>
-    </Loader>
+      <Footer />
+    </Router>
   );
 }
 

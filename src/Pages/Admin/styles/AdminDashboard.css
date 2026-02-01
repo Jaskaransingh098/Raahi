@@ -53,7 +53,8 @@
     color: #1e293b;
     margin-bottom: 1rem;
 }
-.dashboard-section button{
+
+.dashboard-section button {
     padding: 0.6rem 1.2rem;
     font-size: 1rem;
     border: none;
@@ -62,7 +63,8 @@
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.dashboard-section button:hover{
+
+.dashboard-section button:hover {
     background-color: orange;
     color: white;
 }
@@ -81,4 +83,53 @@
 
 .dashboard-buttons button:hover {
     background: #2563eb;
+}
+
+@media (max-width: 768px) {
+
+    /* Admin dashboard padding */
+    .admin-dashboard {
+        padding: 2rem 1rem;
+    }
+
+    /* Dashboard sections */
+    .admin-dashboard .dashboard-section {
+        padding: 1rem;
+        overflow-x: hidden;
+    }
+
+    /* Make the tour/trek container a single column */
+    .admin-dashboard .tour-list-container,
+    .admin-dashboard .trek-list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0;
+        margin: 0;
+        width: 100% !important;
+    }
+
+    /* Cards take full width */
+    .admin-dashboard .tour-card,
+    .admin-dashboard .trek-card {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto;
+        box-sizing: border-box;
+        flex: unset;
+    }
+
+    /* Card images */
+    .admin-dashboard .tour-card-image,
+    .admin-dashboard .trek-card-image {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Ensure any inner elements don't overflow */
+    .admin-dashboard .tour-card-details,
+    .admin-dashboard .trek-card-details {
+        width: 100%;
+        overflow-wrap: break-word;
+    }
 }

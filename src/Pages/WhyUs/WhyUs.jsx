@@ -1,6 +1,7 @@
 import React from "react";
 import Banner from "../../components/Banner/Banner";
 import "./WhyUs.css";
+import { motion } from "framer-motion";
 import {
   ShieldCheck,
   HeartHandshake,
@@ -12,6 +13,19 @@ import {
 } from "lucide-react";
 
 function WhyUs() {
+  const fadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
   return (
     <>
       <div className="why-us-page">
@@ -24,14 +38,28 @@ function WhyUs() {
             loop
             muted
           />
-          <div className="why-us-hero-content">
+          <motion.div
+            className="why-us-hero-content"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
             <h1>Why Travel With Us</h1>
             <p>Your Adventure, Our Passion.</p>
-          </div>
+          </motion.div>
         </section>
 
         {/* --- Introduction Section --- */}
-        <section className="why-us-intro-section">
+        <motion.section
+          className="why-us-intro-section"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="why-us-intro-image">
             <img
               src="/trek-images/hikers-mountains.jpg"
@@ -40,12 +68,12 @@ function WhyUs() {
           </div>
           <div className="why-us-intro-text">
             <h2>
-              RAAHI is a team of passionate travel lovers who love to explore
+              Eco Explorers is a team of passionate travel lovers who love to explore
               nature and its beauty.
             </h2>
             <p>
               With the aim of providing a safe, economic, and fun-filled
-              travelling experience, RAAHI was formed. We strongly believe
+              travelling experience, Eco Explorers was formed. We strongly believe
               everyone should travel, explore the outdoors, and find peace
               within.
             </p>
@@ -55,10 +83,17 @@ function WhyUs() {
               our team to the moment you return home with cherished memories.
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* --- Philosophy Section --- */}
-        <section className="why-us-philosophy-section">
+        <motion.section
+          className="why-us-philosophy-section"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="why-us-philosophy-container">
             <p className="why-us-subtitle">Our Philosophy</p>
             <h2>Safe Travel, Best Travel.</h2>
@@ -94,7 +129,14 @@ function WhyUs() {
                   experiences as hikers and mountain bikers across India.
                 </p>
               </div>
-              <div className="why-us-philosophy-card">
+              <motion.div
+                className="why-us-philosophy-card"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8 }}
+              >
                 <div className="why-us-philosophy-icon">
                   <Bike size={32} />
                 </div>
@@ -103,13 +145,19 @@ function WhyUs() {
                   From solo treks to family tours, we craft personalized
                   itineraries that match your travel style and dreams.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* --- Our Guides Section (Replaced Stats) --- */}
-        <section className="why-us-guides-section">
+        <motion.section
+          className="why-us-guides-section"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <div className="why-us-guides-container">
             <p className="why-us-subtitle">Our Expertise</p>
             <h2>Led by Knowledgeable & Experienced Guides</h2>
@@ -155,7 +203,7 @@ function WhyUs() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
       </div>
     </>
   );

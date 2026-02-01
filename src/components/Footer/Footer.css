@@ -1,7 +1,7 @@
 .exclusive-offer-section {
     width: 100%;
     padding: 20px;
-    /* background-color: #f8f9fa; */
+    background-color: #E7F0FF;
     /* Light gray for the page background */
     font-family: 'Poppins', sans-serif;
 }
@@ -10,7 +10,7 @@
     height: 55vh;
     /* max-width: 1200px; */
     margin: 0 auto;
-    background-color: #082312;
+    background-color: #0b2056;
     /* Dark background for the container */
     color: #ffffff;
     border-radius: 20px;
@@ -61,7 +61,7 @@
 }
 
 .exclusive-offer-button {
-    background-color: #22c55e;
+    background-color: #b8a0cb;
     color: white;
     border: none;
     padding: 6px 18px;
@@ -77,7 +77,7 @@
 
 .exclusive-offer-button-icon {
     background-color: white;
-    color: #22c55e;
+    color: #5475c7;
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -133,7 +133,8 @@
 
 .footer {
     position: relative;
-    background: hsl(var(--background));
+    /* background: hsl(var(--background)); */
+    background-color: #E7F0FF;
     color: hsl(var(--foreground));
     overflow: hidden;
 }
@@ -152,41 +153,47 @@
     margin: 0 auto;
     padding: 64px 24px 0 24px;
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 32px;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 33rem;
 }
 
 /* Brand */
 .footer__brand .brand__logo {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    /* gap: 10px; */
+    /* margin-bottom: 16px; */
 }
 
 .brand__logo-mark {
-    width: 44px;
-    height: 44px;
+    /* width: 44px;
+    height: 44px; */
     border-radius: 12px;
-    background: linear-gradient(135deg, hsl(var(--brand-green) / 0.15), hsl(var(--brand-orange) / 0.15));
+    /* background: linear-gradient(135deg, hsl(var(--brand-green) / 0.15), hsl(var(--brand-orange) / 0.15)); */
     display: grid;
     place-items: center;
     position: relative;
 }
+.brand__logo-mark img {
+    width: 82px;
+    height: 82px;
+    /* padding-right: 40px; */
+    object-fit: contain;
+}
 
 .brand__icon {
-    position: absolute;
+    /* position: absolute; */
 }
 
 .brand__icon--bag {
-    color: hsl(var(--brand-green));
+    color: #0ea5e9;
     width: 26px;
     height: 26px;
     transform: translate(-4px, 2px);
 }
 
 .brand__icon--plane {
-    color: hsl(var(--brand-orange));
+    color: #0ea5e9;
     width: 20px;
     height: 20px;
     transform: translate(8px, -6px) rotate(8deg);
@@ -201,6 +208,7 @@
     font-size: 0.9rem;
     color: hsl(var(--muted-text));
     max-width: 320px;
+    font-style: italic;
     line-height: 1.6;
     margin-bottom: 16px;
 }
@@ -213,11 +221,12 @@
 }
 
 .help__icon {
-    color: hsl(var(--brand-orange));
+    color: #0ea5e9;
 }
 
 .help__label {
     font-size: 13px;
+    font-style: italic;
 }
 
 .brand__phone {
@@ -343,7 +352,7 @@
     place-items: center;
     border-radius: 999px;
     background: hsl(var(--accent));
-    color: hsl(var(--foreground));
+    color: #0ea5e9;
     opacity: 0.9;
     border: 1px solid hsl(var(--border));
     text-decoration: none;
@@ -351,7 +360,7 @@
 }
 
 .social__btn:hover {
-    background: hsl(var(--brand-green-weak));
+    /* background: hsl(var(--brand-green-weak)); */
     opacity: 1;
     transform: translateY(-2px);
 }
@@ -373,7 +382,7 @@
     white-space: nowrap;
     /* margin: 20px auto 0 auto; */
     /* line-height: 0.9; */
-    font-size: 10rem;
+    font-size: 16rem;
     /* font-size: clamp(72px, 13vw, 180px); */
     background: url('/public/footer/beautiful.jpg');
     background-position: center;
@@ -443,13 +452,13 @@
 }
 
 .copy__brand {
-    color: hsl(var(--brand-orange));
+    color: #0ea5e9;
     font-weight: 700;
 }
 
 .company-link-apex {
     text-decoration: none;
-    color: #185b31;
+    color: rgb(210, 66, 66);
     z-index: 10;
     cursor: pointer;
 }
@@ -519,6 +528,7 @@
 @media (max-width: 640px) {
     .footer__container {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
 
     .footer__bottom {

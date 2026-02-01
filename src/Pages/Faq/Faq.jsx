@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Plus, Minus, ArrowRight } from "lucide-react";
 import "./Faq.css";
 import Banner from "../../components/Banner/Banner";
+import {Link} from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqData = [
   {
@@ -63,6 +65,15 @@ function Faq() {
     setOpenQuestion(openQuestion === index ? null : index);
   };
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const answerAnimation = {
+    hidden: { height: 0, opacity: 0 },
+    visible: { height: "auto", opacity: 1 },
+  };
   return (
     <>
       <div className="faq-page">
@@ -70,7 +81,14 @@ function Faq() {
         <section className="faq-section">
           <div className="faq-container">
             {/* Left Column */}
-            <div className="faq-left-col">
+            <motion.div
+              className="faq-left-col"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeUp}
+              transition={{ duration: 0.8 }}
+            >
               <div className="faq-quick-answers">
                 <h3>Quick Answers</h3>
                 <p>
@@ -85,20 +103,32 @@ function Faq() {
                 />
                 <p className="subtitle">Discover World</p>
                 <h3>Looking For Trusted Travel Agency</h3>
-                <button className="faq-booking-btn">
+                <Link to="/tours" className="faq-booking-btn" style={{textDecoration:"none"}}>
                   Booking Tour
                   <span className="faq-booking-btn-icon">
                     <ArrowRight size={16} />
                   </span>
-                </button>
+                </Link>
               </div>
-            </div>
+            </motion.div>
             {/* Right Column */}
-            <div className="faq-right-col">
+            <motion.div
+              className="faq-right-col"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeUp}
+              transition={{ duration: 0.8 }}
+            >
               {faqData.map((faq, index) => (
-                <div
+                <motion.div
                   className={`faq-item ${openQuestion === index ? "open" : ""}`}
                   key={index}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
                   <div
                     className="faq-question"
@@ -113,12 +143,19 @@ function Faq() {
                       )}
                     </div>
                   </div>
-                  <div className="faq-answer-wrapper">
+                  <motion.div
+                    className="faq-answer-wrapper"
+                    variants={answerAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    transition={{ duration: 0.5 }}
+                  >
                     <div className="faq-answer">{faq.answer}</div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       </div>

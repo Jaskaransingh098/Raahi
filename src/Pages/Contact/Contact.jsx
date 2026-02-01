@@ -1,89 +1,137 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "../../components/Banner/Banner";
 import { MapPin, Mail, Phone, ArrowRight } from "lucide-react";
+import axios from "axios";
+import api from "../../api";
+import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 import "./Contact.css";
 
 function Contact() {
-  const mapSrc = `https://www.google.com/maps/embed/v1/place?key=AIzaSyAQ0au8Tm0jRGnPzlk3g2BqviC9cMHcvAU&q=RAAHi+Outdoors,Flat+No.+101,+1st+Floor,+Bauhinia,+Damle+Path,+Law+College+Rd,+Pune,+Maharashtra+411038`;
+  const googleApi = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+  const mapSrc = `https://www.google.com/maps/embed/v1/place?key=${googleApi}&q=,Flat+No.+101,+1st+Floor,+Bauhinia,+Damle+Path,+Law+College+Rd,+Pune,+Maharashtra+411038`;
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (submitting) return;
+
+    setSubmitting(true);
+    const toastId = toast.loading("Sending message...");
+
+    try {
+      await api.post("/api/mail/contact", formData);
+      toast.success("Message sent successfully!", { id: toastId });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to send message.", { id: toastId });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  const fadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <>
       <Banner title="Contact" breadcrumb="Contact" />
 
       <section className="contact-us-section">
-        <div className="contact-us-grid">
-          {/* Left Column */}
-          <div className="contact-us-left-col">
+        <div className="contact-us-container">
+          {/* Left Side */}
+          <motion.div
+            className="contact-us-left"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
             <p className="contact-us-subtitle">Contact Us</p>
-            <h2 className="contact-us-title">
-              Adventure Begins Here Contact Us
-            </h2>
+            <h2 className="contact-us-title">Adventure Begins Here</h2>
+
             <div className="contact-us-card">
               <div className="contact-us-icon-wrapper">
                 <MapPin />
               </div>
-              <h4>Location</h4>
-              <p>Ready to vist out main office?</p>
-              <strong>55 Clark St, Brooklyn, USA</strong>
+              <div>
+                <h4>Location</h4>
+                <p>Ready to visit our main office?</p>
+                <strong>
+                  Flat No. 101, 1st Floor, Bauhinia, Damle Path, Law College Rd,
+                  Pune, Maharashtra 411004
+                </strong>
+              </div>
             </div>
-          </div>
 
-          {/* Center Column */}
-          <div className="contact-us-center-col">
-            <div className="contact-us-image-oval">
-              <img
-                src="https://html.pixelfit.agency/tripex/assets/images/innerpage/contact/contact-img1.jpg"
-                alt="Airplane flying over an island"
-                className="contact-us-main-image"
-              />
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="contact-us-right-col">
             <div className="contact-us-card">
               <div className="contact-us-icon-wrapper">
                 <Mail />
               </div>
-              <h4>Email Us 24/7</h4>
-              <p>Have any question? Send a message</p>
-              <strong>support@gmail.com</strong>
+              <div>
+                <h4>Email Us 24/7</h4>
+                <p>Have any question? Send a message</p>
+                <strong>Wonderlandhimalayas@Gmail.com</strong>
+              </div>
             </div>
+
             <div className="contact-us-card">
               <div className="contact-us-icon-wrapper">
                 <Phone />
               </div>
-              <h4>Online Booking</h4>
-              <p>Need online tour reservations</p>
-              <strong>+1 (234) 456 8888</strong>
+              <div>
+                <h4>Online Booking</h4>
+                <p>Need online reservations?</p>
+                <strong>+91 93707 04070</strong>
+              </div>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Right Side */}
+          <motion.div
+            className="contact-us-right"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="contact-us-image-wrapper">
+              <img
+                src="/admin/Adventure.png"
+                alt="Adventure Illustration"
+                className="contact-us-main-image"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="location-map-section">
+      <motion.section
+        className="location-map-section"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="location-map-container">
-          {/* <div className="location-map-info-box">
-            <h3>RAAHi Outdoors</h3>
-            <p>
-              Flat No. 101, 1st Floor, Bauhinia, Damle Path, Law College Rd,
-              Pune, Maharashtra 411038
-            </p>
-            <div className="location-map-rating">
-              <span>4.8</span>
-              <div className="location-map-stars">
-                <Star className="location-map-star-icon filled" />
-                <Star className="location-map-star-icon filled" />
-                <Star className="location-map-star-icon filled" />
-                <Star className="location-map-star-icon filled" />
-                <Star className="location-map-star-icon filled" />
-              </div>
-              <span>277 reviews</span>
-            </div>
-            <a href="#" className="location-map-directions-link">
-              View larger map
-            </a>
-          </div> */}
-
           <iframe
             className="location-map-iframe"
             src={mapSrc}
@@ -93,12 +141,19 @@ function Contact() {
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Location of RAAHi Outdoors"
+            title="Location of Wonderlandhimalayas Outdoors"
           ></iframe>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="message-form-section">
+      <motion.section
+        className="message-form-section"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="message-form-container">
           <div className="message-form-header">
             <p className="message-form-subtitle">Send Us Message</p>
@@ -106,29 +161,73 @@ function Contact() {
               Send Us a Message — Your Journey Starts Here
             </h2>
           </div>
-          <form className="message-form">
+          <form className="message-form" onSubmit={handleSubmit}>
             <div className="message-form-row">
-              <input type="text" placeholder="Name" required />
-              <input type="email" placeholder="Email Address" required />
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="message-form-row">
-              <input type="tel" placeholder="Phone Number" />
-              <input type="text" placeholder="Subject" required />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="message-form-row">
-              <textarea placeholder="Message" rows="6" required></textarea>
+              <textarea
+                name="message"
+                placeholder="Message"
+                rows="6"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="message-form-footer">
-              <button type="submit" className="message-form-button">
-                Send Comments
-                <span className="message-form-button-icon">
-                  <ArrowRight size={18} />
-                </span>
+              <button
+                type="submit"
+                className="message-form-button"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <span className="loading-spinner" aria-hidden="true"></span>
+                ) : (
+                  <>
+                    Send Comments
+                    <span className="message-form-button-icon">
+                      <ArrowRight size={18} />
+                    </span>
+                  </>
+                )}
               </button>
             </div>
           </form>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }
